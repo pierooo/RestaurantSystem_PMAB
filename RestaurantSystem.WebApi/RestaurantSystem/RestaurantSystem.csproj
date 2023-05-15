@@ -17,9 +17,6 @@
     <Folder Include="Contracts\OrdersDetails\Queries\" />
     <Folder Include="Contracts\Orders\Commands\" />
     <Folder Include="Contracts\Orders\Queries\" />
-    <Folder Include="Contracts\Products\Commands\" />
-    <Folder Include="Contracts\Products\Queries\" />
-    <Folder Include="Handlers\Products\" />
     <Folder Include="Handlers\OrdersDetails\" />
     <Folder Include="Handlers\Orders\" />
   </ItemGroup>
