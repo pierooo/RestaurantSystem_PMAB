@@ -1,4 +1,4 @@
-﻿namespace RestaurantSystem.Contracts.Categories.Commands;
+﻿namespace RestaurantSystem.Contracts;
 
 public class CommandResponse
 {

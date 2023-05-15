@@ -22,8 +22,20 @@ namespace RestaurantSystem.Handlers.Categories
         {
             try
             {
-                RestaurantSystemContext.Categories.Add(CategoriesMapper.MapToDbModel(command));
+                var category = await RestaurantSystemContext.Categories.FindAsync(command.Id);
+
+                if (category == null)
+                {
+                    return new DeleteCategoryResponse()
+                    {
+                        Error = new ErrorModel(ErrorType.NotFound)
+                    };
+                }
+
+                category.IsActive = false;
+
                 await RestaurantSystemContext.SaveChangesAsync();
+
                 return new DeleteCategoryResponse()
                 {
                     Data = new CommandResponse(true)
@@ -33,7 +45,7 @@ namespace RestaurantSystem.Handlers.Categories
             {
                 return new DeleteCategoryResponse()
                 {
-                    Error = new ErrorModel(ex.Message)
+                    Error = new ErrorModel(ErrorType.NotFound)
                 };
             }
         }

@@ -28,7 +28,7 @@ public class GetCategoriesHandler : HandlerBase, IRequestHandler<GetCategories, 
         {
             return new GetCategoriesResponse()
             {
-                Error = new ErrorModel(ErrorType.NotFound + ex.Message)
+                Error = new ErrorModel(ErrorType.NotFound + ": " + ex.Message)
             };
         }
     }

@@ -27,7 +27,7 @@ public class GetCategoryByIdHandler : HandlerBase, IRequestHandler<GetCategoryBy
         {
             return new GetCategoryByIdResponse()
             {
-                Error = new ErrorModel(ErrorType.NotFound + ex.Message)
+                Error = new ErrorModel(ErrorType.NotFound + ": " + ex.Message)
             };
         }
     }
