@@ -1,9 +1,7 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using RestaurantSystem.Contracts;
 using RestaurantSystem.Contracts.Categories.Commands;
 using RestaurantSystem.DataAccess;
-using RestaurantSystem.Mappers;
 
 namespace RestaurantSystem.Handlers.Categories;
 
@@ -17,9 +15,9 @@ public class UpdateCategoryCommandHandler : HandlerBase, IRequestHandler<UpdateC
     {
         try
         {
-            var category = await RestaurantSystemContext.Categories.FindAsync(command.Id);
+            var item = await RestaurantSystemContext.Categories.FindAsync(command.Id);
 
-            if (category == null)
+            if (item == null)
             {
                 return new UpdateCategoryResponse()
                 {
@@ -27,10 +25,10 @@ public class UpdateCategoryCommandHandler : HandlerBase, IRequestHandler<UpdateC
                 };
             }
 
-            category.Name = command.Name;
-            category.Description = command.Description;
-            category.PhotoUrl = command.PhotoUrl;
-            category.UpdatedAt = DateTime.UtcNow;
+            item.Name = command.Name;
+            item.Description = command.Description;
+            item.PhotoUrl = command.PhotoUrl;
+            item.UpdatedAt = DateTime.UtcNow;
 
             await RestaurantSystemContext.SaveChangesAsync();
 

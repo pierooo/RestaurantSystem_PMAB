@@ -33,12 +33,4 @@ public static class CategoriesMapper
             IsActive = true
         };
     }
-
-    public static DataAccess.Models.Category MapToDbModel(DeleteCategoryCommand category)
-    {
-        return new DataAccess.Models.Category()
-        {
-            IsActive = false
-        };
-    }
 }

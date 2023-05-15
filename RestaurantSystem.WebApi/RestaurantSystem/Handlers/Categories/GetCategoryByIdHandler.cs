@@ -18,6 +18,7 @@ public class GetCategoryByIdHandler : HandlerBase, IRequestHandler<GetCategoryBy
         try
         {
             var result = await RestaurantSystemContext.Categories.SingleAsync(x => x.IsActive && x.ID == request.Id);
+
             return new GetCategoryByIdResponse()
             {
                 Data = CategoriesMapper.MapToContract(result)
