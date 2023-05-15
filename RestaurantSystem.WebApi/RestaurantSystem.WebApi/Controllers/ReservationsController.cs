@@ -10,7 +10,7 @@ namespace RestaurantSystem.WebApi.Controllers;
 [Route("[controller]")]
 public class ReservationsController : ApiControllerBase
 {
-    protected ReservationsController(IMediator mediator) : base(mediator)
+    public ReservationsController(IMediator mediator) : base(mediator)
     {
     }
 
