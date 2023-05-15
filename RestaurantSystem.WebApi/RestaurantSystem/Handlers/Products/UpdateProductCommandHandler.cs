@@ -30,7 +30,7 @@ public class UpdateProductCommandHandler : HandlerBase, IRequestHandler<UpdatePr
             item.Description = command.Description;
             item.PhotoUrl = command.PhotoUrl;
             item.CategoryID = command.CategoryID;
-            item.UnitPriceNetto = command.UnitPriceGross / (1 + (item.VAT * 100));
+            item.UnitPriceNetto = command.UnitPriceGross / (1 + (item.VAT / 100));
             item.VAT = command.VAT;
             item.UnitsInStock = command.UnitsInStock;
             item.UpdatedAt = DateTime.UtcNow;

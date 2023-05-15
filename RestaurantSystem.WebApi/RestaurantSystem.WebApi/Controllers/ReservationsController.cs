@@ -16,9 +16,9 @@ public class ReservationsController : ApiControllerBase
 
     [HttpGet]
     [Route("")]
-    public Task<IActionResult> GetAllReservations([FromQuery] GetReservations request)
+    public Task<IActionResult> GetAllReservations([FromQuery] GetReservations query)
     {
-        return this.Send<GetReservations, GetReservationsResponse>(request);
+        return this.Send<GetReservations, GetReservationsResponse>(query);
     }
 
     [HttpGet]
@@ -41,19 +41,19 @@ public class ReservationsController : ApiControllerBase
 
     [HttpPut]
     [Route("")]
-    public Task<IActionResult> PutReservation([FromBody] UpdateReservationCommand request)
+    public Task<IActionResult> PutReservation([FromBody] UpdateReservationCommand command)
     {
-        return this.Send<UpdateReservationCommand, UpdateReservationResponse>(request);
+        return this.Send<UpdateReservationCommand, UpdateReservationResponse>(command);
     }
 
     [HttpDelete]
     [Route("{id}")]
     public Task<IActionResult> DeleteReservation([FromRoute] int id)
     {
-        var request = new DeleteReservationCommand()
+        var command = new DeleteReservationCommand()
         {
             Id = id
         };
-        return this.Send<DeleteReservationCommand, DeleteReservationResponse>(request);
+        return this.Send<DeleteReservationCommand, DeleteReservationResponse>(command);
     }
 }

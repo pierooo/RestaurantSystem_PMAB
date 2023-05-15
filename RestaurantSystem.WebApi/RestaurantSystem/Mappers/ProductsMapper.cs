@@ -33,7 +33,7 @@ public static class ProductsMapper
             Description = item.Description,
             PhotoUrl = item.PhotoUrl,
             CategoryID = item.CategoryID,
-            UnitPriceNetto = item.UnitPriceGross / (1 + (item.VAT * 100)),
+            UnitPriceNetto = item.UnitPriceGross / (1 + (item.VAT / 100)),
             VAT = item.VAT,
             UnitsInStock = item.UnitsInStock,
             CreatedAt = DateTime.UtcNow,

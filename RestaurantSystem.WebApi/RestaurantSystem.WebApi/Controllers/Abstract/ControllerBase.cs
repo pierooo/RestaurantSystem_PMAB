@@ -14,7 +14,7 @@ public class ApiControllerBase : Controller
         this.mediator = mediator;
     }
 
-    protected async Task<IActionResult> Send<TRequest, TResponse>(TRequest query)
+    protected async Task<IActionResult> Send<TRequest, TResponse>(TRequest request)
         where TRequest : IRequest<TResponse>
         where TResponse : ErrorResponseBase
 
@@ -27,7 +27,7 @@ public class ApiControllerBase : Controller
                                 .Select(x => new { property = x.Key, errors = x.Value.Errors }));
         }
 
-        var response = await this.mediator.Send(query);
+        var response = await this.mediator.Send(request);
 
         if (response.Error != null)
         {

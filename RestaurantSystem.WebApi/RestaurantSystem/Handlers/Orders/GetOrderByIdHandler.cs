@@ -13,11 +13,11 @@ public class GetOrderByIdHandler : HandlerBase, IRequestHandler<GetOrderById, Ge
     {
     }
 
-    public async Task<GetOrderByIdResponse> Handle(GetOrderById request, CancellationToken cancellationToken)
+    public async Task<GetOrderByIdResponse> Handle(GetOrderById query, CancellationToken cancellationToken)
     {
         try
         {
-            var result = await RestaurantSystemContext.Orders.SingleAsync(x => x.IsActive && x.ID == request.Id);
+            var result = await RestaurantSystemContext.Orders.SingleAsync(x => x.IsActive && x.ID == query.Id);
 
             return new GetOrderByIdResponse()
             {

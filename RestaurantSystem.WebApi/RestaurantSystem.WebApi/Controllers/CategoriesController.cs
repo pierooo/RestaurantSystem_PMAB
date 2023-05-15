@@ -16,9 +16,9 @@ public class CategoriesController : ApiControllerBase
 
     [HttpGet]
     [Route("")]
-    public Task<IActionResult> GetAllCategories([FromQuery] GetCategories request)
+    public Task<IActionResult> GetAllCategories([FromQuery] GetCategories query)
     {
-        return this.Send<GetCategories, GetCategoriesResponse>(request);
+        return this.Send<GetCategories, GetCategoriesResponse>(query);
     }
 
     [HttpGet]
@@ -41,19 +41,19 @@ public class CategoriesController : ApiControllerBase
 
     [HttpPut]
     [Route("")]
-    public Task<IActionResult> PutCategory([FromBody] UpdateCategoryCommand request)
+    public Task<IActionResult> PutCategory([FromBody] UpdateCategoryCommand command)
     {
-        return this.Send<UpdateCategoryCommand, UpdateCategoryResponse>(request);
+        return this.Send<UpdateCategoryCommand, UpdateCategoryResponse>(command);
     }
 
     [HttpDelete]
     [Route("{id}")]
     public Task<IActionResult> DeleteCategory([FromRoute] int id)
     {
-        var request = new DeleteCategoryCommand()
+        var command = new DeleteCategoryCommand()
         {
             Id = id
         };
-        return this.Send<DeleteCategoryCommand, DeleteCategoryResponse>(request);
+        return this.Send<DeleteCategoryCommand, DeleteCategoryResponse>(command);
     }
 }

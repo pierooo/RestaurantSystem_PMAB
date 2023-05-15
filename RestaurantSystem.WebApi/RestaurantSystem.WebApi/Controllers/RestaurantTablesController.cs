@@ -16,9 +16,9 @@ public class RestaurantTablesController : ApiControllerBase
 
     [HttpGet]
     [Route("")]
-    public Task<IActionResult> GetAllRestaurantTables([FromQuery] GetRestaurantTables request)
+    public Task<IActionResult> GetAllRestaurantTables([FromQuery] GetRestaurantTables query)
     {
-        return this.Send<GetRestaurantTables, GetRestaurantTablesResponse>(request);
+        return this.Send<GetRestaurantTables, GetRestaurantTablesResponse>(query);
     }
 
     [HttpGet]
@@ -41,19 +41,19 @@ public class RestaurantTablesController : ApiControllerBase
 
     [HttpPut]
     [Route("")]
-    public Task<IActionResult> PutRestaurantTable([FromBody] UpdateRestaurantTableCommand request)
+    public Task<IActionResult> PutRestaurantTable([FromBody] UpdateRestaurantTableCommand command)
     {
-        return this.Send<UpdateRestaurantTableCommand, UpdateRestaurantTableResponse>(request);
+        return this.Send<UpdateRestaurantTableCommand, UpdateRestaurantTableResponse>(command);
     }
 
     [HttpDelete]
     [Route("{id}")]
     public Task<IActionResult> DeleteRestaurantTable([FromRoute] int id)
     {
-        var request = new DeleteRestaurantTableCommand()
+        var command = new DeleteRestaurantTableCommand()
         {
             Id = id
         };
-        return this.Send<DeleteRestaurantTableCommand, DeleteRestaurantTableResponse>(request);
+        return this.Send<DeleteRestaurantTableCommand, DeleteRestaurantTableResponse>(command);
     }
 }

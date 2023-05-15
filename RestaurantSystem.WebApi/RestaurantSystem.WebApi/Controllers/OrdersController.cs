@@ -16,9 +16,9 @@ public class OrdersController : ApiControllerBase
 
     [HttpGet]
     [Route("")]
-    public Task<IActionResult> GetAllOrders([FromQuery] GetOrders request)
+    public Task<IActionResult> GetAllOrders([FromQuery] GetOrders query)
     {
-        return this.Send<GetOrders, GetOrdersResponse>(request);
+        return this.Send<GetOrders, GetOrdersResponse>(query);
     }
 
     [HttpGet]
@@ -41,19 +41,19 @@ public class OrdersController : ApiControllerBase
 
     [HttpPut]
     [Route("")]
-    public Task<IActionResult> PutOrder([FromBody] UpdateOrderCommand request)
+    public Task<IActionResult> PutOrder([FromBody] UpdateOrderCommand command)
     {
-        return this.Send<UpdateOrderCommand, UpdateOrderResponse>(request);
+        return this.Send<UpdateOrderCommand, UpdateOrderResponse>(command);
     }
 
     [HttpDelete]
     [Route("{id}")]
     public Task<IActionResult> DeleteOrder([FromRoute] int id)
     {
-        var request = new DeleteOrderCommand()
+        var command = new DeleteOrderCommand()
         {
             Id = id
         };
-        return this.Send<DeleteOrderCommand, DeleteOrderResponse>(request);
+        return this.Send<DeleteOrderCommand, DeleteOrderResponse>(command);
     }
 }

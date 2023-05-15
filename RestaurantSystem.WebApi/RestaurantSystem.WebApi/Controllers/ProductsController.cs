@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using RestaurantSystem.Contracts.Products.Commands;
 using RestaurantSystem.Contracts.Products.Queries;
-using RestaurantSystem.Contracts.Reservations.Commands;
-using RestaurantSystem.Contracts.Reservations.Queries;
 using RestaurantSystem.WebApi.Controllers.Abstract;
 
 namespace RestaurantSystem.WebApi.Controllers;
@@ -18,9 +16,9 @@ public class ProductsController : ApiControllerBase
 
     [HttpGet]
     [Route("")]
-    public Task<IActionResult> GetAllProducts([FromQuery] GetProducts request)
+    public Task<IActionResult> GetAllProducts([FromQuery] GetProducts query)
     {
-        return this.Send<GetProducts, GetProductsResponse>(request);
+        return this.Send<GetProducts, GetProductsResponse>(query);
     }
 
     [HttpGet]
@@ -43,20 +41,20 @@ public class ProductsController : ApiControllerBase
 
     [HttpPut]
     [Route("")]
-    public Task<IActionResult> PutProduct([FromBody] UpdateProductCommand request)
+    public Task<IActionResult> PutProduct([FromBody] UpdateProductCommand command)
     {
-        return this.Send<UpdateProductCommand, UpdateProductResponse>(request);
+        return this.Send<UpdateProductCommand, UpdateProductResponse>(command);
     }
 
     [HttpDelete]
     [Route("{id}")]
     public Task<IActionResult> DeleteProduct([FromRoute] int id)
     {
-        var request = new DeleteProductCommand()
+        var command = new DeleteProductCommand()
         {
             Id = id
         };
-        return this.Send<DeleteProductCommand, DeleteProductResponse>(request);
+        return this.Send<DeleteProductCommand, DeleteProductResponse>(command);
     }
 }
 
