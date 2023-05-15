@@ -26,6 +26,18 @@ public class UpdateOrderDetailsCommandHandler : HandlerBase, IRequestHandler<Upd
                 };
             }
 
+            var order = await RestaurantSystemContext.Orders.FindAsync(item.OrderID);
+
+            if (order == null)
+            {
+                return new UpdateOrderDetailsResponse()
+                {
+                    Error = new ErrorModel(ErrorType.NotFound + ": " + nameof(Order))
+                };
+            }
+
+            order.TotalPriceGross -= (item.UnitPriceNetto * (1 + (100 / item.VAT))) * item.Quantity;
+
             item.ProductID = command.ProductID;
             item.Quantity = command.Quantity;
             item.Notes = command.Notes;
@@ -46,6 +58,8 @@ public class UpdateOrderDetailsCommandHandler : HandlerBase, IRequestHandler<Upd
 
                 item.UnitPriceNetto = product.UnitPriceNetto;
             }
+
+            order.TotalPriceGross += (item.UnitPriceNetto * (1 + (item.VAT / 100))) * item.Quantity;
 
             await RestaurantSystemContext.SaveChangesAsync();
 

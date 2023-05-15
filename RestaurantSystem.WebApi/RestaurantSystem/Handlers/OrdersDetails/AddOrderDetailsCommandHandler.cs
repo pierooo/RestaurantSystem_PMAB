@@ -18,13 +18,13 @@ public class AddOrderDetailsCommandHandler : HandlerBase, IRequestHandler<AddOrd
     {
         try
         {
-            var item = await RestaurantSystemContext.Orders.FindAsync(command.OrderID);
+            var order = await RestaurantSystemContext.Orders.FindAsync(command.OrderID);
 
-            if (item == null)
+            if (order == null)
             {
                 return new AddOrderDetailsResponse()
                 {
-                    Error = new ErrorModel(ErrorType.NotFound)
+                    Error = new ErrorModel(ErrorType.NotFound + ": " + nameof(Order))
                 };
             }
 
@@ -35,7 +35,11 @@ public class AddOrderDetailsCommandHandler : HandlerBase, IRequestHandler<AddOrd
             orderDetails.VAT = product.VAT;
 
             RestaurantSystemContext.OrdersDetails.Add(orderDetails);
+
+            order.TotalPriceGross += (orderDetails.UnitPriceNetto * (1 + (orderDetails.VAT / 100))) * orderDetails.Quantity;
+
             await RestaurantSystemContext.SaveChangesAsync();
+
             return new AddOrderDetailsResponse()
             {
                 Data = new CommandResponse(true)

@@ -17,7 +17,7 @@ public class OrdersDetailsMapper
             Id = item.ID,
             OrderID = item.OrderID,
             ProductID = item.ProductID,
-            UnitPriceGross = item.UnitPriceNetto * (1 + (100 / item.VAT)),
+            UnitPriceGross = item.UnitPriceNetto * (1 + (item.VAT / 100)),
             VAT = item.VAT,
             Quantity = item.Quantity,
             Status = item.Status,
