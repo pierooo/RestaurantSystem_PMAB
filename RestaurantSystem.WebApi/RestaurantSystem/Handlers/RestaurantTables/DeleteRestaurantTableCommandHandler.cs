@@ -38,7 +38,7 @@ public class DeleteRestaurantTableCommandHandler : HandlerBase, IRequestHandler<
         {
             return new DeleteRestaurantTableResponse()
             {
-                Error = new ErrorModel(ErrorType.NotFound)
+                Error = new ErrorModel(ex.Message)
             };
         }
     }

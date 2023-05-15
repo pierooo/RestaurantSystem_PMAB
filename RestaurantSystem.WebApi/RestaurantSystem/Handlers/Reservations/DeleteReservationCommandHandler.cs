@@ -38,7 +38,7 @@ public class DeleteReservationCommandHandler : HandlerBase, IRequestHandler<Dele
         {
             return new DeleteReservationResponse()
             {
-                Error = new ErrorModel(ErrorType.NotFound)
+                Error = new ErrorModel(ex.Message)
             };
         }
     }

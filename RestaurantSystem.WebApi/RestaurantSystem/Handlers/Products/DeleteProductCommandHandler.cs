@@ -38,7 +38,7 @@ public class DeleteProductCommandHandler : HandlerBase, IRequestHandler<DeletePr
         {
             return new DeleteProductResponse()
             {
-                Error = new ErrorModel(ErrorType.NotFound)
+                Error = new ErrorModel(ex.Message)
             };
         }
     }

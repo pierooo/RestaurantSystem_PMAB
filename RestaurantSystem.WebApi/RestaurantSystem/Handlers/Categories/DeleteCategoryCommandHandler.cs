@@ -38,7 +38,7 @@ public class DeleteCategoryCommandHandler : HandlerBase, IRequestHandler<DeleteC
         {
             return new DeleteCategoryResponse()
             {
-                Error = new ErrorModel(ErrorType.NotFound)
+                Error = new ErrorModel(ex.Message)
             };
         }
     }

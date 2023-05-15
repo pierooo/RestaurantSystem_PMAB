@@ -15,10 +15,7 @@
   <ItemGroup>
     <Folder Include="Contracts\OrdersDetails\Commands\" />
     <Folder Include="Contracts\OrdersDetails\Queries\" />
-    <Folder Include="Contracts\Orders\Commands\" />
-    <Folder Include="Contracts\Orders\Queries\" />
     <Folder Include="Handlers\OrdersDetails\" />
-    <Folder Include="Handlers\Orders\" />
   </ItemGroup>
 
   <ItemGroup>
