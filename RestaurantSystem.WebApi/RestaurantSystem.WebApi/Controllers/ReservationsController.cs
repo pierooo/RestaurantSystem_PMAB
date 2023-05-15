@@ -34,21 +34,21 @@ public class ReservationsController : ApiControllerBase
 
     [HttpPost]
     [Route("")]
-    public Task<IActionResult> AddCategory([FromBody] AddReservationCommand command)
+    public Task<IActionResult> AddReservation([FromBody] AddReservationCommand command)
     {
         return this.Send<AddReservationCommand, AddReservationResponse>(command);
     }
 
     [HttpPut]
     [Route("")]
-    public Task<IActionResult> PutCategory([FromBody] UpdateReservationCommand request)
+    public Task<IActionResult> PutReservation([FromBody] UpdateReservationCommand request)
     {
         return this.Send<UpdateReservationCommand, UpdateReservationResponse>(request);
     }
 
     [HttpDelete]
     [Route("{id}")]
-    public Task<IActionResult> DeleteCategory([FromRoute] int id)
+    public Task<IActionResult> DeleteReservation([FromRoute] int id)
     {
         var request = new DeleteReservationCommand()
         {

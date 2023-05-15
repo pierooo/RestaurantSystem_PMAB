@@ -1,5 +1,4 @@
-﻿using RestaurantSystem.Contracts.Categories.Commands;
-using RestaurantSystem.Contracts.Entities;
+﻿using RestaurantSystem.Contracts.Entities;
 using RestaurantSystem.Contracts.Reservations.Commands;
 
 namespace RestaurantSystem.Mappers;

@@ -1,8 +1,7 @@
 ﻿using MediatR;
-using RestaurantSystem.Contracts.Categories.Commands;
 using RestaurantSystem.Contracts;
-using RestaurantSystem.DataAccess;
 using RestaurantSystem.Contracts.Reservations.Commands;
+using RestaurantSystem.DataAccess;
 
 namespace RestaurantSystem.Handlers.Reservations;
 

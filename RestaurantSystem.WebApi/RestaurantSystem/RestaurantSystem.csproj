@@ -19,9 +19,6 @@
     <Folder Include="Contracts\Orders\Queries\" />
     <Folder Include="Contracts\Products\Commands\" />
     <Folder Include="Contracts\Products\Queries\" />
-    <Folder Include="Contracts\RestaurantTables\Commands\" />
-    <Folder Include="Contracts\RestaurantTables\Queries\" />
-    <Folder Include="Handlers\RestaurantTables\" />
     <Folder Include="Handlers\Products\" />
     <Folder Include="Handlers\OrdersDetails\" />
     <Folder Include="Handlers\Orders\" />

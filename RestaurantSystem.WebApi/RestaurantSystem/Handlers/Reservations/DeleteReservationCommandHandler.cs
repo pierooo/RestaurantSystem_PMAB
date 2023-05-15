@@ -15,9 +15,9 @@ public class DeleteReservationCommandHandler : HandlerBase, IRequestHandler<Dele
     {
         try
         {
-            var category = await RestaurantSystemContext.Reservations.FindAsync(command.Id);
+            var item = await RestaurantSystemContext.Reservations.FindAsync(command.Id);
 
-            if (category == null)
+            if (item == null)
             {
                 return new DeleteReservationResponse()
                 {
@@ -25,7 +25,7 @@ public class DeleteReservationCommandHandler : HandlerBase, IRequestHandler<Dele
                 };
             }
 
-            category.IsActive = false;
+            item.IsActive = false;
 
             await RestaurantSystemContext.SaveChangesAsync();
 
