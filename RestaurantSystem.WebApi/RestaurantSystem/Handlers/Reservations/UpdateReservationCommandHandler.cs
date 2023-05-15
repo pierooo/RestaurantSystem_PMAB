@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using RestaurantSystem.Contracts;
+using RestaurantSystem.Contracts.Entities;
 using RestaurantSystem.Contracts.Reservations.Commands;
 using RestaurantSystem.DataAccess;
 
@@ -42,7 +43,7 @@ public class UpdateReservationCommandHandler : HandlerBase, IRequestHandler<Upda
         {
             return new UpdateReservationResponse()
             {
-                Error = new ErrorModel(ex.Message)
+                Error = new ErrorModel(ErrorType.NotFound + ": " + nameof(RestaurantTable))
             };
         }
     }

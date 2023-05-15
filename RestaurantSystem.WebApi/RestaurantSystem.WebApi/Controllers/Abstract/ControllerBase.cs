@@ -48,12 +48,6 @@ public class ApiControllerBase : Controller
         return error switch
         {
             ErrorType.NotFound => HttpStatusCode.NotFound,
-            ErrorType.InternalServerError => HttpStatusCode.InternalServerError,
-            ErrorType.Unautorized => HttpStatusCode.Unauthorized,
-            ErrorType.RequestTooLarge => HttpStatusCode.RequestEntityTooLarge,
-            ErrorType.UnSupportedMediaType => HttpStatusCode.UnsupportedMediaType,
-            ErrorType.UnSupportedMethod => HttpStatusCode.MethodNotAllowed,
-            ErrorType.TooManyRequest => HttpStatusCode.TooManyRequests,
             _ => HttpStatusCode.BadRequest,
         };
     }

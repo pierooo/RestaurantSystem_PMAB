@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using RestaurantSystem.Contracts;
+using RestaurantSystem.Contracts.Entities;
 using RestaurantSystem.Contracts.Reservations.Commands;
 using RestaurantSystem.DataAccess;
 using RestaurantSystem.Mappers;
@@ -27,7 +28,7 @@ public class AddReservationCommandHandler : HandlerBase, IRequestHandler<AddRese
         {
             return new AddReservationResponse()
             {
-                Error = new ErrorModel(ex.Message)
+                Error = new ErrorModel(ErrorType.NotFound + ": " + nameof(RestaurantTable))
             };
         }
     }
