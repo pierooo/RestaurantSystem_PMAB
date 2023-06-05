@@ -1,37 +1,33 @@
-﻿using RestaurantSystem.Models;
-using RestaurantSystem.Views;
+﻿using RestaurantSystem.Services.Abstract;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace RestaurantSystem.ViewModels
+namespace RestaurantSystem.ViewModels.Abstract
 {
-    public class ItemsViewModel : BaseViewModel
+    public abstract class AListViewModel<T> : BaseViewModel
     {
-        private Item _selectedItem;
-
-        public ObservableCollection<Item> Items { get; }
+        public IDataStore<T> DataStore => DependencyService.Get<IDataStore<T>>();
+        private T _selectedItem;
+        public ObservableCollection<T> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
-        public Command<Item> ItemTapped { get; }
+        public Command<T> ItemTapped { get; }
 
-        public ItemsViewModel()
+        public AListViewModel(string title)
         {
-            Title = "Browse";
-            Items = new ObservableCollection<Item>();
+            Title = title;
+            Items = new ObservableCollection<T>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
-            ItemTapped = new Command<Item>(OnItemSelected);
-
+            ItemTapped = new Command<T>(OnItemSelected);
             AddItemCommand = new Command(OnAddItem);
         }
 
         async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
-
             try
             {
                 Items.Clear();
@@ -50,14 +46,13 @@ namespace RestaurantSystem.ViewModels
                 IsBusy = false;
             }
         }
-
         public void OnAppearing()
         {
             IsBusy = true;
-            SelectedItem = null;
+            SelectedItem = default(T);
         }
 
-        public Item SelectedItem
+        public T SelectedItem
         {
             get => _selectedItem;
             set
@@ -66,19 +61,17 @@ namespace RestaurantSystem.ViewModels
                 OnItemSelected(value);
             }
         }
-
-        private async void OnAddItem(object obj)
+        public abstract void GoToAddPage();
+        public async void OnAddItem(object obj)
         {
-            await Shell.Current.GoToAsync(nameof(NewItemPage));
+            GoToAddPage();
         }
 
-        async void OnItemSelected(Item item)
+        public async virtual void OnItemSelected(T item)
         {
             if (item == null)
                 return;
-
-            // This will push the ItemDetailPage onto the navigation stack
-            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+            //await Shell.Current.GoToAsync($"{nameof(ClientDetailPage)}?{nameof(ClientDetailViewModel.ItemId)}={item.IdClient}");
         }
     }
 }
