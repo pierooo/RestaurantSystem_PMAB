@@ -5,14 +5,14 @@ namespace RestaurantSystem.Mappers;
 
 public static class ProductsMapper
 {
-    public static IReadOnlyCollection<Product> MapToContract(IReadOnlyCollection<DataAccess.Models.Product> items)
+    public static IReadOnlyCollection<Product>? MapToContract(IReadOnlyCollection<DataAccess.Models.Product>? items)
     {
-        return items.Select(x => MapToContract(x)).ToList();
+        return items?.Select(x => MapToContract(x)).ToList();
     }
 
-    public static Product MapToContract(DataAccess.Models.Product item)
+    public static Product MapToContract(DataAccess.Models.Product? item)
     {
-        return new Product()
+        return item == null ? throw new Exception("Entity not found") : new Product()
         {
             Id = item.ID,
             Name = item.Name,

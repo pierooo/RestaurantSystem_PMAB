@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using RestaurantSystem.Contracts;
 using RestaurantSystem.Contracts.Products.Commands;
 using RestaurantSystem.Contracts.Products.Queries;
 using RestaurantSystem.WebApi.Controllers.Abstract;
@@ -16,45 +17,48 @@ public class ProductsController : ApiControllerBase
 
     [HttpGet]
     [Route("")]
-    public Task<IActionResult> GetAllProducts([FromQuery] GetProducts query)
+    public async Task<ActionResult<GetProductsResponse>> GetAllProducts([FromQuery] GetProducts query)
     {
-        return this.Send<GetProducts, GetProductsResponse>(query);
+        return await this.Send<GetProducts, GetProductsResponse>(query);
     }
 
     [HttpGet]
     [Route("{id}")]
-    public Task<IActionResult> GetProductById([FromRoute] int id)
+    public async Task<ActionResult<GetProductByIdResponse>> GetProductById([FromRoute] int id)
     {
         var query = new GetProductById()
         {
             Id = id
         };
-        return this.Send<GetProductById, GetProductByIdResponse>(query);
+        return await this.Send<GetProductById, GetProductByIdResponse>(query);
     }
 
     [HttpPost]
     [Route("")]
-    public Task<IActionResult> AddProduct([FromBody] AddProductCommand command)
+    public async Task<IActionResult> AddProduct([FromBody] AddProductCommand command)
     {
-        return this.Send<AddProductCommand, AddProductResponse>(command);
+        await this.Send<AddProductCommand, CommandResponse>(command);
+        return Ok();
     }
 
     [HttpPut]
     [Route("")]
-    public Task<IActionResult> PutProduct([FromBody] UpdateProductCommand command)
+    public async Task<IActionResult> PutProduct([FromBody] UpdateProductCommand command)
     {
-        return this.Send<UpdateProductCommand, UpdateProductResponse>(command);
+        await this.Send<UpdateProductCommand, CommandResponse>(command);
+        return Ok();
     }
 
     [HttpDelete]
     [Route("{id}")]
-    public Task<IActionResult> DeleteProduct([FromRoute] int id)
+    public async Task<IActionResult> DeleteProduct([FromRoute] int id)
     {
         var command = new DeleteProductCommand()
         {
             Id = id
         };
-        return this.Send<DeleteProductCommand, DeleteProductResponse>(command);
+        await this.Send<DeleteProductCommand, CommandResponse>(command);
+        return Ok();
     }
 }
 

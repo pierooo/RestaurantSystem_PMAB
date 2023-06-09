@@ -1,11 +1,5 @@
 ﻿namespace RestaurantSystem.Contracts;
 
-public class CommandResponse
+public class CommandResponse : IResponseBase
 {
-    public bool Done { get; }
-
-    public CommandResponse(bool done)
-    {
-        Done = done;
-    }
 }

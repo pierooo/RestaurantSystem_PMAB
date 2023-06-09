@@ -5,14 +5,14 @@ namespace RestaurantSystem.Mappers;
 
 public static class CategoriesMapper
 {
-    public static IReadOnlyCollection<Category> MapToContract(IReadOnlyCollection<DataAccess.Models.Category> categories)
+    public static IReadOnlyCollection<Category>? MapToContract(IReadOnlyCollection<DataAccess.Models.Category>? categories)
     {
-        return categories.Select(x => MapToContract(x)).ToList();
+        return categories?.Select(x => MapToContract(x)).ToList();
     }
 
-    public static Category MapToContract(DataAccess.Models.Category category)
+    public static Category MapToContract(DataAccess.Models.Category? category)
     {
-        return new Category()
+        return category == null ? throw new Exception("Entity not found") : new Category()
         {
             Id = category.ID,
             Name = category.Name,

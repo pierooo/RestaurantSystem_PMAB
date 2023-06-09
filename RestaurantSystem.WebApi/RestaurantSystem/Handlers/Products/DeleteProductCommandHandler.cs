@@ -5,42 +5,26 @@ using RestaurantSystem.DataAccess;
 
 namespace RestaurantSystem.Handlers.Products;
 
-public class DeleteProductCommandHandler : HandlerBase, IRequestHandler<DeleteProductCommand, DeleteProductResponse>
+public class DeleteProductCommandHandler : HandlerBase, IRequestHandler<DeleteProductCommand, CommandResponse>
 {
     public DeleteProductCommandHandler(RestaurantSystemContext restaurantSystemContext) : base(restaurantSystemContext)
     {
     }
 
-    public async Task<DeleteProductResponse> Handle(DeleteProductCommand command, CancellationToken cancellationToken)
+    public async Task<CommandResponse> Handle(DeleteProductCommand command, CancellationToken cancellationToken)
     {
-        try
+        var item = await restaurantSystemContext.Products.FindAsync(command.Id);
+
+        if (item == null)
         {
-            var item = await RestaurantSystemContext.Products.FindAsync(command.Id);
-
-            if (item == null)
-            {
-                return new DeleteProductResponse()
-                {
-                    Error = new ErrorModel(ErrorType.NotFound)
-                };
-            }
-
-            item.IsActive = false;
-
-            await RestaurantSystemContext.SaveChangesAsync();
-
-            return new DeleteProductResponse()
-            {
-                Data = new CommandResponse(true)
-            };
+            throw new Exception("Entity not found: " + nameof(Products));
         }
-        catch (Exception ex)
-        {
-            return new DeleteProductResponse()
-            {
-                Error = new ErrorModel(ex.Message)
-            };
-        }
+
+        item.IsActive = false;
+
+        await restaurantSystemContext.SaveChangesAsync();
+
+        return new CommandResponse();
     }
 }
 

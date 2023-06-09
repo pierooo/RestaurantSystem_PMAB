@@ -13,9 +13,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<RestaurantSystemContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("RestaurantSystemContext") ?? throw new InvalidOperationException("Connection string 'RestaurantSystemContext' not found."), options => options.EnableRetryOnFailure());
+    options.UseSqlServer(builder.Configuration.GetConnectionString("restaurantSystemContext") ?? throw new InvalidOperationException("Connection string 'restaurantSystemContext' not found."), options => options.EnableRetryOnFailure());
 });
-builder.Services.AddMediatR(typeof(ResponseBase<>));
+builder.Services.AddMediatR(typeof(IResponseBase));
 
 var app = builder.Build();
 

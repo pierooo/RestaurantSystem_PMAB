@@ -1,5 +1,4 @@
-﻿using System.Net;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantSystem.Contracts;
 
@@ -14,10 +13,9 @@ public class ApiControllerBase : Controller
         this.mediator = mediator;
     }
 
-    protected async Task<IActionResult> Send<TRequest, TResponse>(TRequest request)
+    protected async Task<ActionResult<TResponse>> Send<TRequest, TResponse>(TRequest request)
         where TRequest : IRequest<TResponse>
-        where TResponse : ErrorResponseBase
-
+        where TResponse : IResponseBase
     {
         if (!this.ModelState.IsValid)
         {
@@ -29,27 +27,12 @@ public class ApiControllerBase : Controller
 
         var response = await this.mediator.Send(request);
 
-        if (response.Error != null)
+        if(response == null)
         {
-            return this.ErrorResponse(response.Error);
+            return NotFound();
         }
 
-        return this.Ok(response);
-    }
-
-    private IActionResult ErrorResponse(ErrorModel errorModel)
-    {
-        var httpCode = GetHttpStatusCode(errorModel.Error);
-        return StatusCode((int)httpCode, errorModel);
-    }
-
-    private static HttpStatusCode GetHttpStatusCode(string error)
-    {
-        return error switch
-        {
-            ErrorType.NotFound => HttpStatusCode.NotFound,
-            _ => HttpStatusCode.BadRequest,
-        };
+        return response;
     }
 }
 

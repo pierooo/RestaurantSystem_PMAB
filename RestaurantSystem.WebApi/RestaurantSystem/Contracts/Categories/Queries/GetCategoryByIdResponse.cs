@@ -2,6 +2,7 @@
 
 namespace RestaurantSystem.Contracts.Categories.Queries;
 
-public class GetCategoryByIdResponse : ResponseBase<Category>
+public class GetCategoryByIdResponse : IResponseBase
 {
+    public Category? Category { get; set; }
 }

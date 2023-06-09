@@ -5,42 +5,26 @@ using RestaurantSystem.DataAccess;
 
 namespace RestaurantSystem.Handlers.Reservations;
 
-public class DeleteReservationCommandHandler : HandlerBase, IRequestHandler<DeleteReservationCommand, DeleteReservationResponse>
+public class DeleteReservationCommandHandler : HandlerBase, IRequestHandler<DeleteReservationCommand, CommandResponse>
 {
     public DeleteReservationCommandHandler(RestaurantSystemContext restaurantSystemContext) : base(restaurantSystemContext)
     {
     }
 
-    public async Task<DeleteReservationResponse> Handle(DeleteReservationCommand command, CancellationToken cancellationToken)
+    public async Task<CommandResponse> Handle(DeleteReservationCommand command, CancellationToken cancellationToken)
     {
-        try
+        var item = await restaurantSystemContext.Reservations.FindAsync(command.Id);
+
+        if (item == null)
         {
-            var item = await RestaurantSystemContext.Reservations.FindAsync(command.Id);
-
-            if (item == null)
-            {
-                return new DeleteReservationResponse()
-                {
-                    Error = new ErrorModel(ErrorType.NotFound)
-                };
-            }
-
-            item.IsActive = false;
-
-            await RestaurantSystemContext.SaveChangesAsync();
-
-            return new DeleteReservationResponse()
-            {
-                Data = new CommandResponse(true)
-            };
+            throw new Exception("Entity not found: " + nameof(Reservations));
         }
-        catch (Exception ex)
-        {
-            return new DeleteReservationResponse()
-            {
-                Error = new ErrorModel(ex.Message)
-            };
-        }
+
+        item.IsActive = false;
+
+        await restaurantSystemContext.SaveChangesAsync();
+
+        return new CommandResponse();
     }
 }
 

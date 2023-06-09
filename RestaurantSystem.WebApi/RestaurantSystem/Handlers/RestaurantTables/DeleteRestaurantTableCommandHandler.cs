@@ -5,41 +5,25 @@ using RestaurantSystem.DataAccess;
 
 namespace RestaurantSystem.Handlers.RestaurantTables;
 
-public class DeleteRestaurantTableCommandHandler : HandlerBase, IRequestHandler<DeleteRestaurantTableCommand, DeleteRestaurantTableResponse>
+public class DeleteRestaurantTableCommandHandler : HandlerBase, IRequestHandler<DeleteRestaurantTableCommand, CommandResponse>
 {
     public DeleteRestaurantTableCommandHandler(RestaurantSystemContext restaurantSystemContext) : base(restaurantSystemContext)
     {
     }
 
-    public async Task<DeleteRestaurantTableResponse> Handle(DeleteRestaurantTableCommand command, CancellationToken cancellationToken)
+    public async Task<CommandResponse> Handle(DeleteRestaurantTableCommand command, CancellationToken cancellationToken)
     {
-        try
+        var item = await restaurantSystemContext.RestaurantTables.FindAsync(command.Id);
+
+        if (item == null)
         {
-            var item = await RestaurantSystemContext.RestaurantTables.FindAsync(command.Id);
-
-            if (item == null)
-            {
-                return new DeleteRestaurantTableResponse()
-                {
-                    Error = new ErrorModel(ErrorType.NotFound)
-                };
-            }
-
-            item.IsActive = false;
-
-            await RestaurantSystemContext.SaveChangesAsync();
-
-            return new DeleteRestaurantTableResponse()
-            {
-                Data = new CommandResponse(true)
-            };
+            throw new Exception("Entity not found: " + nameof(RestaurantTables));
         }
-        catch (Exception ex)
-        {
-            return new DeleteRestaurantTableResponse()
-            {
-                Error = new ErrorModel(ex.Message)
-            };
-        }
+
+        item.IsActive = false;
+
+        await restaurantSystemContext.SaveChangesAsync();
+
+        return new CommandResponse();
     }
 }

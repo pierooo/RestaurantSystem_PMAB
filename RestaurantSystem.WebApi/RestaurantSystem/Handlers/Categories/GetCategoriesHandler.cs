@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using RestaurantSystem.Contracts;
 using RestaurantSystem.Contracts.Categories.Queries;
 using RestaurantSystem.DataAccess;
 using RestaurantSystem.Mappers;
@@ -15,21 +14,11 @@ public class GetCategoriesHandler : HandlerBase, IRequestHandler<GetCategories, 
 
     public async Task<GetCategoriesResponse> Handle(GetCategories request, CancellationToken cancellationToken)
     {
-        try
-        {
-            var result = await RestaurantSystemContext.Categories.Where(x => x.IsActive).ToListAsync();
+        var result = await restaurantSystemContext.Categories.Where(x => x.IsActive).ToListAsync();
 
-            return new GetCategoriesResponse()
-            {
-                Data = CategoriesMapper.MapToContract(result)
-            };
-        }
-        catch (Exception ex)
+        return new GetCategoriesResponse()
         {
-            return new GetCategoriesResponse()
-            {
-                Error = new ErrorModel(ex.Message)
-            };
-        }
+            Categories = CategoriesMapper.MapToContract(result)
+        };
     }
 }

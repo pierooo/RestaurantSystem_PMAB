@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using RestaurantSystem.Contracts;
 using RestaurantSystem.Contracts.OrdersDetails.Commands;
 using RestaurantSystem.Contracts.OrdersDetails.Queries;
 using RestaurantSystem.WebApi.Controllers.Abstract;
@@ -16,48 +17,51 @@ public class OrdersDetailsController : ApiControllerBase
 
     [HttpGet]
     [Route("order/{orderId}")]
-    public Task<IActionResult> GetAllOrdersDetailsByOrderId([FromRoute] int orderId)
+    public async Task<ActionResult<GetOrdersDetailsByOrderIdResponse>> GetAllOrdersDetailsByOrderId([FromRoute] int orderId)
     {
         var query = new GetOrdersDetailsByOrderId()
         {
             OrderId = orderId
         };
-        return this.Send<GetOrdersDetailsByOrderId, GetOrdersDetailsByOrderIdResponse>(query);
+        return await this.Send<GetOrdersDetailsByOrderId, GetOrdersDetailsByOrderIdResponse>(query);
     }
 
     [HttpGet]
     [Route("{id}")]
-    public Task<IActionResult> GetOrderDetailsById([FromRoute] int id)
+    public async Task<ActionResult<GetOrderDetailsByIdResponse>> GetOrderDetailsById([FromRoute] int id)
     {
         var query = new GetOrderDetailsById()
         {
             Id = id
         };
-        return this.Send<GetOrderDetailsById, GetOrderDetailsByIdResponse>(query);
+        return await this.Send<GetOrderDetailsById, GetOrderDetailsByIdResponse>(query);
     }
 
     [HttpPost]
     [Route("")]
-    public Task<IActionResult> AddOrderDetails([FromBody] AddOrderDetailsCommand command)
+    public async Task<IActionResult> AddOrderDetails([FromBody] AddOrderDetailsCommand command)
     {
-        return this.Send<AddOrderDetailsCommand, AddOrderDetailsResponse>(command);
+        await this.Send<AddOrderDetailsCommand, CommandResponse>(command);
+        return Ok();
     }
 
     [HttpPut]
     [Route("")]
-    public Task<IActionResult> PutOrderDetails([FromBody] UpdateOrderDetailsCommand command)
+    public async Task<IActionResult> PutOrderDetails([FromBody] UpdateOrderDetailsCommand command)
     {
-        return this.Send<UpdateOrderDetailsCommand, UpdateOrderDetailsResponse>(command);
+        await this.Send<UpdateOrderDetailsCommand, CommandResponse>(command);
+        return Ok();
     }
 
     [HttpDelete]
     [Route("{id}")]
-    public Task<IActionResult> DeleteOrderDetails([FromRoute] int id)
+    public async Task<IActionResult> DeleteOrderDetails([FromRoute] int id)
     {
         var command = new DeleteOrderDetailsCommand()
         {
             Id = id
         };
-        return this.Send<DeleteOrderDetailsCommand, DeleteOrderDetailsResponse>(command);
+        await this.Send<DeleteOrderDetailsCommand, CommandResponse>(command);
+        return Ok();
     }
 }

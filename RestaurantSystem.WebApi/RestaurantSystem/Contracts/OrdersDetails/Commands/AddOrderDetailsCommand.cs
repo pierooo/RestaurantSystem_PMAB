@@ -2,7 +2,7 @@
 
 namespace RestaurantSystem.Contracts.OrdersDetails.Commands;
 
-public class AddOrderDetailsCommand : IRequest<AddOrderDetailsResponse>
+public class AddOrderDetailsCommand : IRequest<CommandResponse>
 {
     public int OrderID { get; set; }
 

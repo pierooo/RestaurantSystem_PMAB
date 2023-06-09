@@ -6,29 +6,16 @@ using RestaurantSystem.Mappers;
 
 namespace RestaurantSystem.Handlers.Categories;
 
-public class AddCategoryCommandHandler : HandlerBase, IRequestHandler<AddCategoryCommand, AddCategoryResponse>
+public class AddCategoryCommandHandler : HandlerBase, IRequestHandler<AddCategoryCommand, CommandResponse>
 {
     public AddCategoryCommandHandler(RestaurantSystemContext restaurantSystemContext) : base(restaurantSystemContext)
     {
     }
 
-    public async Task<AddCategoryResponse> Handle(AddCategoryCommand command, CancellationToken cancellationToken)
+    public async Task<CommandResponse> Handle(AddCategoryCommand command, CancellationToken cancellationToken)
     {
-        try
-        {
-            RestaurantSystemContext.Categories.Add(CategoriesMapper.MapToDbModel(command));
-            await RestaurantSystemContext.SaveChangesAsync();
-            return new AddCategoryResponse()
-            {
-                Data = new CommandResponse(true)
-            };
-        }
-        catch (Exception ex)
-        {
-            return new AddCategoryResponse()
-            {
-                Error = new ErrorModel(ex.Message)
-            };
-        }
+        restaurantSystemContext.Categories.Add(CategoriesMapper.MapToDbModel(command));
+        await restaurantSystemContext.SaveChangesAsync();
+        return new CommandResponse();
     }
 }

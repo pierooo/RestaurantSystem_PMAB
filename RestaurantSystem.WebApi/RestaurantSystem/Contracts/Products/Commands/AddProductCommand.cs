@@ -2,7 +2,7 @@
 
 namespace RestaurantSystem.Contracts.Products.Commands;
 
-public class AddProductCommand : IRequest<AddProductResponse>
+public class AddProductCommand : IRequest<CommandResponse>
 {
     public string? Name { get; set; }
 

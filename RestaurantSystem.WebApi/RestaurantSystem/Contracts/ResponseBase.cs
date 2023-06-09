@@ -1,6 +1,5 @@
 ﻿namespace RestaurantSystem.Contracts;
 
-public class ResponseBase<T> : ErrorResponseBase
+public interface IResponseBase
 {
-    public T? Data { get; set; }
 }

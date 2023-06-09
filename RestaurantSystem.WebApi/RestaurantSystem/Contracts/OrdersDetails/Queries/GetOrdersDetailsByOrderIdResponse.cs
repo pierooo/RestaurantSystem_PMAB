@@ -2,6 +2,7 @@
 
 namespace RestaurantSystem.Contracts.OrdersDetails.Queries;
 
-public class GetOrdersDetailsByOrderIdResponse : ResponseBase<IReadOnlyCollection<OrderDetails>>
+public class GetOrdersDetailsByOrderIdResponse : IResponseBase
 {
+    public IReadOnlyCollection<OrderDetails>? OrderDetails { get; set; }
 }

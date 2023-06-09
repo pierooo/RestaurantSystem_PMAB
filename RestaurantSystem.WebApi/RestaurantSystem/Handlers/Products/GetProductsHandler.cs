@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using RestaurantSystem.Contracts;
 using RestaurantSystem.Contracts.Products.Queries;
 using RestaurantSystem.DataAccess;
 using RestaurantSystem.Mappers;
@@ -15,22 +14,12 @@ public class GetProductsHandler : HandlerBase, IRequestHandler<GetProducts, GetP
 
     public async Task<GetProductsResponse> Handle(GetProducts request, CancellationToken cancellationToken)
     {
-        try
-        {
-            var result = await RestaurantSystemContext.Products.Where(x => x.IsActive).ToListAsync();
+        var result = await restaurantSystemContext.Products.Where(x => x.IsActive).ToListAsync();
 
-            return new GetProductsResponse()
-            {
-                Data = ProductsMapper.MapToContract(result)
-            };
-        }
-        catch (Exception ex)
+        return new GetProductsResponse()
         {
-            return new GetProductsResponse()
-            {
-                Error = new ErrorModel(ErrorType.NotFound + ": " + ex.Message)
-            };
-        }
+            Products = ProductsMapper.MapToContract(result)
+        };
     }
 }
 
