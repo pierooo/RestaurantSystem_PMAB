@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 
 namespace RestaurantSystem.Contracts.Categories.Commands;
 
