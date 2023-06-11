@@ -2,6 +2,7 @@
 
 namespace RestaurantSystem.Contracts.Products.Queries;
 
-public class GetProductsResponse : ResponseBase<IReadOnlyCollection<Product>>
+public class GetProductsResponse : IResponseBase
 {
+    public IReadOnlyCollection<Product>? Products { get; set; }
 }

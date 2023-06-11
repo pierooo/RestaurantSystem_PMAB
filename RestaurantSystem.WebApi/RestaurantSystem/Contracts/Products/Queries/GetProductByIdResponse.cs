@@ -2,6 +2,7 @@
 
 namespace RestaurantSystem.Contracts.Products.Queries;
 
-public class GetProductByIdResponse : ResponseBase<Product>
+public class GetProductByIdResponse : IResponseBase
 {
+    public Product? Product { get; set; }
 }

@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using RestaurantSystem.Contracts;
 using RestaurantSystem.Contracts.RestaurantTables.Commands;
 using RestaurantSystem.Contracts.RestaurantTables.Queries;
 using RestaurantSystem.WebApi.Controllers.Abstract;
@@ -16,44 +17,47 @@ public class RestaurantTablesController : ApiControllerBase
 
     [HttpGet]
     [Route("")]
-    public Task<IActionResult> GetAllRestaurantTables([FromQuery] GetRestaurantTables query)
+    public async Task<ActionResult<GetRestaurantTablesResponse>> GetAllRestaurantTables([FromQuery] GetRestaurantTables query)
     {
-        return this.Send<GetRestaurantTables, GetRestaurantTablesResponse>(query);
+        return await this.Send<GetRestaurantTables, GetRestaurantTablesResponse>(query);
     }
 
     [HttpGet]
     [Route("{id}")]
-    public Task<IActionResult> GetRestaurantTableById([FromRoute] int id)
+    public async Task<ActionResult<GetRestaurantTableByIdResponse>> GetRestaurantTableById([FromRoute] int id)
     {
         var query = new GetRestaurantTableById()
         {
             Id = id
         };
-        return this.Send<GetRestaurantTableById, GetRestaurantTableByIdResponse>(query);
+        return await this.Send<GetRestaurantTableById, GetRestaurantTableByIdResponse>(query);
     }
 
     [HttpPost]
     [Route("")]
-    public Task<IActionResult> AddRestaurantTable([FromBody] AddRestaurantTableCommand command)
+    public async Task<IActionResult> AddRestaurantTable([FromBody] AddRestaurantTableCommand command)
     {
-        return this.Send<AddRestaurantTableCommand, AddRestaurantTableResponse>(command);
+        await this.Send<AddRestaurantTableCommand, CommandResponse>(command);
+        return Ok();
     }
 
     [HttpPut]
     [Route("")]
-    public Task<IActionResult> PutRestaurantTable([FromBody] UpdateRestaurantTableCommand command)
+    public async Task<IActionResult> PutRestaurantTable([FromBody] UpdateRestaurantTableCommand command)
     {
-        return this.Send<UpdateRestaurantTableCommand, UpdateRestaurantTableResponse>(command);
+        await this.Send<UpdateRestaurantTableCommand, CommandResponse>(command);
+        return Ok();
     }
 
     [HttpDelete]
     [Route("{id}")]
-    public Task<IActionResult> DeleteRestaurantTable([FromRoute] int id)
+    public async Task<IActionResult> DeleteRestaurantTable([FromRoute] int id)
     {
         var command = new DeleteRestaurantTableCommand()
         {
             Id = id
         };
-        return this.Send<DeleteRestaurantTableCommand, DeleteRestaurantTableResponse>(command);
+        await this.Send<DeleteRestaurantTableCommand, CommandResponse>(command);
+        return Ok();
     }
 }

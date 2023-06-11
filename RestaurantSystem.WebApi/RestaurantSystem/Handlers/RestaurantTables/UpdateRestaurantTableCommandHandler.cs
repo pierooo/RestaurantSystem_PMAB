@@ -5,45 +5,29 @@ using RestaurantSystem.DataAccess;
 
 namespace RestaurantSystem.Handlers.RestaurantTables;
 
-public class UpdateRestaurantTableCommandHandler : HandlerBase, IRequestHandler<UpdateRestaurantTableCommand, UpdateRestaurantTableResponse>
+public class UpdateRestaurantTableCommandHandler : HandlerBase, IRequestHandler<UpdateRestaurantTableCommand, CommandResponse>
 {
     public UpdateRestaurantTableCommandHandler(RestaurantSystemContext restaurantSystemContext) : base(restaurantSystemContext)
     {
     }
 
-    public async Task<UpdateRestaurantTableResponse> Handle(UpdateRestaurantTableCommand command, CancellationToken cancellationToken)
+    public async Task<CommandResponse> Handle(UpdateRestaurantTableCommand command, CancellationToken cancellationToken)
     {
-        try
+        var item = await restaurantSystemContext.RestaurantTables.FindAsync(command.Id);
+
+        if (item == null)
         {
-            var item = await RestaurantSystemContext.RestaurantTables.FindAsync(command.Id);
-
-            if (item == null)
-            {
-                return new UpdateRestaurantTableResponse()
-                {
-                    Error = new ErrorModel(ErrorType.NotFound)
-                };
-            }
-
-            item.Name = command.Name;
-            item.Description = command.Description;
-            item.MaxCapacity = command.MaxCapacity;
-            item.PhotoUrl = command.PhotoUrl;
-            item.UpdatedAt = DateTime.UtcNow;
-
-            await RestaurantSystemContext.SaveChangesAsync();
-
-            return new UpdateRestaurantTableResponse()
-            {
-                Data = new CommandResponse(true)
-            };
+            throw new Exception("Entity not found: " + nameof(RestaurantTables));
         }
-        catch (Exception ex)
-        {
-            return new UpdateRestaurantTableResponse()
-            {
-                Error = new ErrorModel(ex.Message)
-            };
-        }
+
+        item.Name = command.Name;
+        item.Description = command.Description;
+        item.MaxCapacity = command.MaxCapacity;
+        item.PhotoUrl = command.PhotoUrl;
+        item.UpdatedAt = DateTime.UtcNow;
+
+        await restaurantSystemContext.SaveChangesAsync();
+
+        return new CommandResponse();
     }
 }

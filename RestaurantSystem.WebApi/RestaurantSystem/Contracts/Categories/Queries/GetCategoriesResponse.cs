@@ -2,6 +2,7 @@
 
 namespace RestaurantSystem.Contracts.Categories.Queries;
 
-public class GetCategoriesResponse : ResponseBase<IReadOnlyCollection<Category>>
+public class GetCategoriesResponse : IResponseBase
 {
+    public IReadOnlyCollection<Category>? Categories { get; set; }
 }

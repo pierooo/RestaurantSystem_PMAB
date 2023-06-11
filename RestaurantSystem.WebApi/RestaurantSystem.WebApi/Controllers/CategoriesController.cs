@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using RestaurantSystem.Contracts;
 using RestaurantSystem.Contracts.Categories.Commands;
 using RestaurantSystem.Contracts.Categories.Queries;
 using RestaurantSystem.WebApi.Controllers.Abstract;
@@ -16,44 +17,47 @@ public class CategoriesController : ApiControllerBase
 
     [HttpGet]
     [Route("")]
-    public Task<IActionResult> GetAllCategories([FromQuery] GetCategories query)
+    public async Task<ActionResult<GetCategoriesResponse>> GetAllCategories([FromQuery] GetCategories query)
     {
-        return this.Send<GetCategories, GetCategoriesResponse>(query);
+        return await this.Send<GetCategories, GetCategoriesResponse>(query);
     }
 
     [HttpGet]
     [Route("{id}")]
-    public Task<IActionResult> GetCategoryById([FromRoute] int id)
+    public async Task<ActionResult<GetCategoryByIdResponse>> GetCategoryById([FromRoute] int id)
     {
         var query = new GetCategoryById()
         {
             Id = id
         };
-        return this.Send<GetCategoryById, GetCategoryByIdResponse>(query);
+        return await this.Send<GetCategoryById, GetCategoryByIdResponse>(query);
     }
 
     [HttpPost]
     [Route("")]
-    public Task<IActionResult> AddCategory([FromBody] AddCategoryCommand command)
+    public async Task<IActionResult> AddCategory([FromBody] AddCategoryCommand command)
     {
-        return this.Send<AddCategoryCommand, AddCategoryResponse>(command);
+        await this.Send<AddCategoryCommand, CommandResponse>(command);
+        return Ok();
     }
 
     [HttpPut]
     [Route("")]
-    public Task<IActionResult> PutCategory([FromBody] UpdateCategoryCommand command)
+    public async Task<IActionResult> PutCategory([FromBody] UpdateCategoryCommand command)
     {
-        return this.Send<UpdateCategoryCommand, UpdateCategoryResponse>(command);
+        await this.Send<UpdateCategoryCommand, CommandResponse>(command);
+        return Ok();
     }
 
     [HttpDelete]
     [Route("{id}")]
-    public Task<IActionResult> DeleteCategory([FromRoute] int id)
+    public async Task<IActionResult> DeleteCategory([FromRoute] int id)
     {
         var command = new DeleteCategoryCommand()
         {
             Id = id
         };
-        return this.Send<DeleteCategoryCommand, DeleteCategoryResponse>(command);
+        await this.Send<DeleteCategoryCommand, CommandResponse>(command);
+        return Ok();
     }
 }

@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using RestaurantSystem.Contracts;
 using RestaurantSystem.Contracts.Categories.Queries;
 using RestaurantSystem.DataAccess;
 using RestaurantSystem.Mappers;
@@ -15,21 +14,11 @@ public class GetCategoryByIdHandler : HandlerBase, IRequestHandler<GetCategoryBy
 
     public async Task<GetCategoryByIdResponse> Handle(GetCategoryById request, CancellationToken cancellationToken)
     {
-        try
-        {
-            var result = await RestaurantSystemContext.Categories.SingleAsync(x => x.IsActive && x.ID == request.Id);
+        var result = await restaurantSystemContext.Categories.SingleAsync(x => x.IsActive && x.ID == request.Id);
 
-            return new GetCategoryByIdResponse()
-            {
-                Data = CategoriesMapper.MapToContract(result)
-            };
-        }
-        catch (Exception ex)
+        return new GetCategoryByIdResponse()
         {
-            return new GetCategoryByIdResponse()
-            {
-                Error = new ErrorModel(ErrorType.NotFound + ": " + ex.Message)
-            };
-        }
+            Category = CategoriesMapper.MapToContract(result)
+        };
     }
 }

@@ -4,10 +4,10 @@ namespace RestaurantSystem.Handlers;
 
 public abstract class HandlerBase
 {
-    protected readonly RestaurantSystemContext RestaurantSystemContext;
+    protected readonly RestaurantSystemContext restaurantSystemContext;
 
     public HandlerBase(RestaurantSystemContext restaurantSystemContext)
     {
-        RestaurantSystemContext = restaurantSystemContext;
+        this.restaurantSystemContext = restaurantSystemContext;
     }
 }

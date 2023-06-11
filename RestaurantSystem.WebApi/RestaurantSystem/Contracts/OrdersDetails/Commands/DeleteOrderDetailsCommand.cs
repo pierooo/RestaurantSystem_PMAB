@@ -2,7 +2,7 @@
 
 namespace RestaurantSystem.Contracts.OrdersDetails.Commands;
 
-public class DeleteOrderDetailsCommand : IRequest<DeleteOrderDetailsResponse>
+public class DeleteOrderDetailsCommand : IRequest<CommandResponse>
 {
     public int Id { get; set; }
 }

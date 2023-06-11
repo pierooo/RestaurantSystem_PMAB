@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using RestaurantSystem.Contracts;
 using RestaurantSystem.Contracts.OrdersDetails.Queries;
 using RestaurantSystem.DataAccess;
 using RestaurantSystem.Mappers;
@@ -15,21 +14,11 @@ public class GetOrderDetailsByIdHandler : HandlerBase, IRequestHandler<GetOrderD
 
     public async Task<GetOrderDetailsByIdResponse> Handle(GetOrderDetailsById query, CancellationToken cancellationToken)
     {
-        try
-        {
-            var result = await RestaurantSystemContext.OrdersDetails.SingleAsync(x => x.IsActive && x.ID == query.Id);
+        var result = await restaurantSystemContext.OrdersDetails.SingleAsync(x => x.IsActive && x.ID == query.Id);
 
-            return new GetOrderDetailsByIdResponse()
-            {
-                Data = OrdersDetailsMapper.MapToContract(result)
-            };
-        }
-        catch (Exception ex)
+        return new GetOrderDetailsByIdResponse()
         {
-            return new GetOrderDetailsByIdResponse()
-            {
-                Error = new ErrorModel(ErrorType.NotFound + ": " + ex.Message)
-            };
-        }
+            OrderDetails = OrdersDetailsMapper.MapToContract(result)
+        };
     }
 }

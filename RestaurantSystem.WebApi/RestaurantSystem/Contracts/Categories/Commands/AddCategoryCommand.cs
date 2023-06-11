@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 
 namespace RestaurantSystem.Contracts.Categories.Commands;
 
-public class AddCategoryCommand : IRequest<AddCategoryResponse>
+public class AddCategoryCommand : IRequest<CommandResponse>
 {
     public string? Name { get; set; }
 

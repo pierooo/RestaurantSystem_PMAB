@@ -5,44 +5,28 @@ using RestaurantSystem.DataAccess;
 
 namespace RestaurantSystem.Handlers.Categories;
 
-public class UpdateCategoryCommandHandler : HandlerBase, IRequestHandler<UpdateCategoryCommand, UpdateCategoryResponse>
+public class UpdateCategoryCommandHandler : HandlerBase, IRequestHandler<UpdateCategoryCommand, CommandResponse>
 {
     public UpdateCategoryCommandHandler(RestaurantSystemContext restaurantSystemContext) : base(restaurantSystemContext)
     {
     }
 
-    public async Task<UpdateCategoryResponse> Handle(UpdateCategoryCommand command, CancellationToken cancellationToken)
+    public async Task<CommandResponse> Handle(UpdateCategoryCommand command, CancellationToken cancellationToken)
     {
-        try
+        var item = await restaurantSystemContext.Categories.FindAsync(command.Id);
+
+        if (item == null)
         {
-            var item = await RestaurantSystemContext.Categories.FindAsync(command.Id);
-
-            if (item == null)
-            {
-                return new UpdateCategoryResponse()
-                {
-                    Error = new ErrorModel(ErrorType.NotFound)
-                };
-            }
-
-            item.Name = command.Name;
-            item.Description = command.Description;
-            item.PhotoUrl = command.PhotoUrl;
-            item.UpdatedAt = DateTime.UtcNow;
-
-            await RestaurantSystemContext.SaveChangesAsync();
-
-            return new UpdateCategoryResponse()
-            {
-                Data = new CommandResponse(true)
-            };
+            throw new Exception("Entity not found: " + nameof(Categories));
         }
-        catch (Exception ex)
-        {
-            return new UpdateCategoryResponse()
-            {
-                Error = new ErrorModel(ex.Message)
-            };
-        }
+
+        item.Name = command.Name;
+        item.Description = command.Description;
+        item.PhotoUrl = command.PhotoUrl;
+        item.UpdatedAt = DateTime.UtcNow;
+
+        await restaurantSystemContext.SaveChangesAsync();
+
+        return new CommandResponse();
     }
 }

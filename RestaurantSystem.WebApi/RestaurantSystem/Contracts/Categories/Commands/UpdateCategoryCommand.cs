@@ -2,7 +2,7 @@
 
 namespace RestaurantSystem.Contracts.Categories.Commands;
 
-public class UpdateCategoryCommand : IRequest<UpdateCategoryResponse>
+public class UpdateCategoryCommand : IRequest<CommandResponse>
 {
     public int Id { get; set; }
 

@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using RestaurantSystem.Contracts;
 using RestaurantSystem.Contracts.RestaurantTables.Queries;
 using RestaurantSystem.DataAccess;
 using RestaurantSystem.Mappers;
@@ -15,21 +14,11 @@ public class GetRestaurantTableByIdHandler : HandlerBase, IRequestHandler<GetRes
 
     public async Task<GetRestaurantTableByIdResponse> Handle(GetRestaurantTableById request, CancellationToken cancellationToken)
     {
-        try
-        {
-            var result = await RestaurantSystemContext.RestaurantTables.SingleAsync(x => x.IsActive && x.ID == request.Id);
+        var result = await restaurantSystemContext.RestaurantTables.SingleAsync(x => x.IsActive && x.ID == request.Id);
 
-            return new GetRestaurantTableByIdResponse()
-            {
-                Data = RestaurantTablesMapper.MapToContract(result)
-            };
-        }
-        catch (Exception ex)
+        return new GetRestaurantTableByIdResponse()
         {
-            return new GetRestaurantTableByIdResponse()
-            {
-                Error = new ErrorModel(ErrorType.NotFound + ": " + ex.Message)
-            };
-        }
+            RestaurantTable = RestaurantTablesMapper.MapToContract(result)
+        };
     }
 }

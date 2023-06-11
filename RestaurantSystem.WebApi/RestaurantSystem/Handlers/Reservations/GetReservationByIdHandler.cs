@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using RestaurantSystem.Contracts;
 using RestaurantSystem.Contracts.Reservations.Queries;
 using RestaurantSystem.DataAccess;
 using RestaurantSystem.Mappers;
@@ -15,21 +14,11 @@ public class GetReservationByIdHandler : HandlerBase, IRequestHandler<GetReserva
 
     public async Task<GetReservationByIdResponse> Handle(GetReservationById request, CancellationToken cancellationToken)
     {
-        try
-        {
-            var result = await RestaurantSystemContext.Reservations.SingleAsync(x => x.IsActive && x.ID == request.Id);
+        var result = await restaurantSystemContext.Reservations.SingleAsync(x => x.IsActive && x.ID == request.Id);
 
-            return new GetReservationByIdResponse()
-            {
-                Data = ReservationsMapper.MapToContract(result)
-            };
-        }
-        catch (Exception ex)
+        return new GetReservationByIdResponse()
         {
-            return new GetReservationByIdResponse()
-            {
-                Error = new ErrorModel(ErrorType.NotFound + ": " + ex.Message)
-            };
-        }
+            Reservation = ReservationsMapper.MapToContract(result)
+        };
     }
 }

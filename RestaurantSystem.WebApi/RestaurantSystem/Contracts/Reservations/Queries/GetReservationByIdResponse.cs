@@ -2,6 +2,7 @@
 
 namespace RestaurantSystem.Contracts.Reservations.Queries;
 
-public class GetReservationByIdResponse : ResponseBase<Reservation>
+public class GetReservationByIdResponse : IResponseBase
 {
+    public Reservation? Reservation { get; set; }
 }

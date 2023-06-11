@@ -2,7 +2,7 @@
 
 namespace RestaurantSystem.Contracts.Reservations.Commands;
 
-public class AddReservationCommand : IRequest<AddReservationResponse>
+public class AddReservationCommand : IRequest<CommandResponse>
 {
     public int RestaurantTableId { get; set; }
 

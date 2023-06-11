@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using RestaurantSystem.Contracts;
 using RestaurantSystem.Contracts.Orders.Commands;
 using RestaurantSystem.Contracts.Orders.Queries;
 using RestaurantSystem.WebApi.Controllers.Abstract;
@@ -16,44 +17,47 @@ public class OrdersController : ApiControllerBase
 
     [HttpGet]
     [Route("")]
-    public Task<IActionResult> GetAllOrders([FromQuery] GetOrders query)
+    public async Task<ActionResult<GetOrdersResponse>> GetAllOrders([FromQuery] GetOrders query)
     {
-        return this.Send<GetOrders, GetOrdersResponse>(query);
+        return await this.Send<GetOrders, GetOrdersResponse>(query);
     }
 
     [HttpGet]
     [Route("{id}")]
-    public Task<IActionResult> GetOrderById([FromRoute] int id)
+    public async Task<ActionResult<GetOrderByIdResponse>> GetOrderById([FromRoute] int id)
     {
         var query = new GetOrderById()
         {
             Id = id
         };
-        return this.Send<GetOrderById, GetOrderByIdResponse>(query);
+        return await this.Send<GetOrderById, GetOrderByIdResponse>(query);
     }
 
     [HttpPost]
     [Route("")]
-    public Task<IActionResult> AddOrder([FromBody] AddOrderCommand command)
+    public async Task<IActionResult> AddOrder([FromBody] AddOrderCommand command)
     {
-        return this.Send<AddOrderCommand, AddOrderResponse>(command);
+        await this.Send<AddOrderCommand, CommandResponse>(command);
+        return Ok();
     }
 
     [HttpPut]
     [Route("")]
-    public Task<IActionResult> PutOrder([FromBody] UpdateOrderCommand command)
+    public async Task<IActionResult> PutOrder([FromBody] UpdateOrderCommand command)
     {
-        return this.Send<UpdateOrderCommand, UpdateOrderResponse>(command);
+        await this.Send<UpdateOrderCommand, CommandResponse>(command);
+        return Ok();
     }
 
     [HttpDelete]
     [Route("{id}")]
-    public Task<IActionResult> DeleteOrder([FromRoute] int id)
+    public async Task<IActionResult> DeleteOrder([FromRoute] int id)
     {
         var command = new DeleteOrderCommand()
         {
             Id = id
         };
-        return this.Send<DeleteOrderCommand, DeleteOrderResponse>(command);
+        await this.Send<DeleteOrderCommand, CommandResponse>(command);
+        return Ok();
     }
 }
