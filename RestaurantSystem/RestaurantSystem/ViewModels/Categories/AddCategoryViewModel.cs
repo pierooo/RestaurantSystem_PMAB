@@ -3,7 +3,7 @@ using RestaurantSystem.ViewModels.Abstract;
 
 namespace RestaurantSystem.ViewModels.Categories
 {
-    public class AddCategoryViewModel : ANewViewModel<AddCategoryCommand>
+    public class AddCategoryViewModel : ANewViewModel<Category>
     {
         private string name;
         private string description;
@@ -32,9 +32,9 @@ namespace RestaurantSystem.ViewModels.Categories
         {
         }
 
-        public override AddCategoryCommand SetItem()
+        public override Category SetItem()
         {
-            return new AddCategoryCommand
+            return new Category
             {
                 Name = this.name,
                 Description = this.description,

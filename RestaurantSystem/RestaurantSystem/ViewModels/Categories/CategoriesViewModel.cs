@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace RestaurantSystem.ViewModels.Categories
 {
-    public class CategoriesViewModel : AListViewModel<GetCategories>
+    public class CategoriesViewModel : AListViewModel<Category>
     {
         public CategoriesViewModel()
             : base("Kategorie!")

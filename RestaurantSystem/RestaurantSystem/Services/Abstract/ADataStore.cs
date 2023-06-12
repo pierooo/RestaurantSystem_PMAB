@@ -19,7 +19,7 @@ namespace RestaurantSystem.Services.Abstract
                 };
 #endif
             var client = new HttpClient(handler);
-            _service = new RestaurantSystemService("https://localhost:7035", client);
+            _service = new RestaurantSystemService("https://localhost:7029", client);
         }
     }
 }
