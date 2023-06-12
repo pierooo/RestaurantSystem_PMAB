@@ -1,5 +1,6 @@
 ﻿using RestaurantSystem.ViewModels;
 using RestaurantSystem.Views;
+using RestaurantSystem.Views.Categories;
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
@@ -10,9 +11,9 @@ namespace RestaurantSystem
     {
         public AppShell()
         {
+            Routing.RegisterRoute(nameof(CategoriesPage), typeof(CategoriesPage));
+            Routing.RegisterRoute(nameof(AddCategoryPage), typeof(AddCategoryPage));
             InitializeComponent();
-            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
-            Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

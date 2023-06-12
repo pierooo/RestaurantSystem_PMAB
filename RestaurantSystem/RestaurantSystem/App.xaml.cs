@@ -12,8 +12,7 @@ namespace RestaurantSystem
         public App()
         {
             InitializeComponent();
-
-            DependencyService.Register<MockDataStore>();
+            DependencyService.Register<CategoriesDataStore>();
             MainPage = new AppShell();
         }
 
