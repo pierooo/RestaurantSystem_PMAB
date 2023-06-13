@@ -11,6 +11,9 @@ namespace RestaurantSystem
             Routing.RegisterRoute(nameof(CategoriesPage), typeof(CategoriesPage));
             Routing.RegisterRoute(nameof(AddCategoryPage), typeof(AddCategoryPage));
             Routing.RegisterRoute(nameof(EditCategoryPage), typeof(EditCategoryPage));
+            Routing.RegisterRoute(nameof(ProductsPage), typeof(ProductsPage));
+            Routing.RegisterRoute(nameof(AddProductPage), typeof(AddProductPage));
+            Routing.RegisterRoute(nameof(EditProductPage), typeof(EditProductPage));
             InitializeComponent();
         }
 
