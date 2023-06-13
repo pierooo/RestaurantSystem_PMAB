@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RestaurantSystem.Views.EditProductPage"
+             Shell.PresentationMode="ModalAnimated"
+             Title="Edytuj kategorie">
+    <ContentPage.Content>
+        <StackLayout Spacing="3" Padding="15">
+            <Label Text="Nazwa" FontSize="Medium" />
+            <Entry Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Opis" FontSize="Medium" />
+            <Entry Text="{Binding Description, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Zdjęcie url" FontSize="Medium" />
+            <Entry Text="{Binding PhotoUrl, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Kategoria" FontSize="Medium" />
+            <Entry Text="{Binding CategoryId, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Cena brutto" FontSize="Medium" />
+            <Entry Text="{Binding UnitPriceGross, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Stawka VAT w % (np 8)" FontSize="Medium" />
+            <Entry Text="{Binding Vat, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Ilość na stanie" FontSize="Medium" />
+            <Entry Text="{Binding UnitsInStock, Mode=TwoWay}" FontSize="Medium" />
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Anuluj" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Zapisz" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

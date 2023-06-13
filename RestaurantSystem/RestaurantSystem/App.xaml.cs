@@ -1,8 +1,5 @@
 ﻿using RestaurantSystem.Services;
-using RestaurantSystem.Views;
-using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace RestaurantSystem
 {
@@ -13,6 +10,7 @@ namespace RestaurantSystem
         {
             InitializeComponent();
             DependencyService.Register<CategoriesDataStore>();
+            DependencyService.Register<ProductsDataStore>();
             MainPage = new AppShell();
         }
 
