@@ -14,6 +14,8 @@ namespace RestaurantSystem.ViewModels.Abstract
         public ObservableCollection<T> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
+        public Command DeleteItemCommand { get; }
+        public Command EditItemCommand { get; }
         public Command<T> ItemTapped { get; }
 
         public AListViewModel(string title)
@@ -23,6 +25,8 @@ namespace RestaurantSystem.ViewModels.Abstract
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ItemTapped = new Command<T>(OnItemSelected);
             AddItemCommand = new Command(OnAddItem);
+            DeleteItemCommand = new Command<int>(ExecuteDeleteCommand);
+            EditItemCommand = new Command<int>(ExecuteEditCommand);
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -72,6 +76,24 @@ namespace RestaurantSystem.ViewModels.Abstract
             if (item == null)
                 return;
             //await Shell.Current.GoToAsync($"{nameof(ClientDetailPage)}?{nameof(ClientDetailViewModel.ItemId)}={item.IdClient}");
+        }
+
+        private async void ExecuteDeleteCommand(int id)
+        {
+            await DataStore.DeleteItemAsync(id);
+            await ExecuteLoadItemsCommand();
+        }
+
+        public abstract Page EditPage(T Item);
+
+        private async void ExecuteEditCommand(int id)
+        {
+            var item = await DataStore.GetItemAsync(id);
+            if (item != null)
+            {
+                var editPage = EditPage(item);
+                await Shell.Current.Navigation.PushAsync(editPage);
+            }
         }
     }
 }

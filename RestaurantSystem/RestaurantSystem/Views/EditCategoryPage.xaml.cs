@@ -6,14 +6,15 @@ using Xamarin.Forms.Xaml;
 namespace RestaurantSystem.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddCategoryPage : ContentPage
+    public partial class EditCategoryPage : ContentPage
     {
-        public Category Item { get; set; }
+        public Category Category { get; set; }
 
-        public AddCategoryPage()
+        public EditCategoryPage(Category category)
         {
+            Category = category;
             InitializeComponent();
-            BindingContext = new AddCategoryViewModel();
+            BindingContext = new EditCategoryViewModel(category);
         }
     }
 }

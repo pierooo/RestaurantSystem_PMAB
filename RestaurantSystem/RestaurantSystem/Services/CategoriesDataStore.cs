@@ -43,6 +43,7 @@ namespace RestaurantSystem.Services
             var tmp = await _service.Categories4Async(id);
             return new Category
             {
+                Id = tmp.Category.Id,
                 Name = tmp.Category.Name,
                 Description = tmp.Category.Description,
                 PhotoUrl = tmp.Category.PhotoUrl,

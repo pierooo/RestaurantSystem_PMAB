@@ -1,8 +1,5 @@
-﻿using RestaurantSystem.ViewModels;
-using RestaurantSystem.Views;
-using RestaurantSystem.Views.Categories;
+﻿using RestaurantSystem.Views;
 using System;
-using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace RestaurantSystem
@@ -13,6 +10,7 @@ namespace RestaurantSystem
         {
             Routing.RegisterRoute(nameof(CategoriesPage), typeof(CategoriesPage));
             Routing.RegisterRoute(nameof(AddCategoryPage), typeof(AddCategoryPage));
+            Routing.RegisterRoute(nameof(EditCategoryPage), typeof(EditCategoryPage));
             InitializeComponent();
         }
 
