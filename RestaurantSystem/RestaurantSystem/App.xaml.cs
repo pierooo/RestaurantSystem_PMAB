@@ -11,6 +11,7 @@ namespace RestaurantSystem
             InitializeComponent();
             DependencyService.Register<CategoriesDataStore>();
             DependencyService.Register<ProductsDataStore>();
+            DependencyService.Register<OrdersDataStore>();
             MainPage = new AppShell();
         }
 
