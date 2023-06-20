@@ -12,14 +12,14 @@ namespace RestaurantSystem.ViewModels.RestaurantTables
         {
         }
 
-        public override Page EditPage(Category item)
+        public override Page EditPage(RestaurantTable item)
         {
-            return new EditCategoryPage(item);
+            return new EditRestaurantTablePage(item);
         }
 
         public override void GoToAddPage()
         {
-            Shell.Current.GoToAsync(nameof(AddCategoryPage));
+            Shell.Current.GoToAsync(nameof(AddRestaurantTablePage));
         }
     }
 }

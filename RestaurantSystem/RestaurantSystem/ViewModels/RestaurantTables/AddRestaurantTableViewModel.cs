@@ -1,7 +1,7 @@
 ﻿using RestaurantSystem.Service.Reference;
 using RestaurantSystem.ViewModels.Abstract;
 
-namespace RestaurantSystem.ViewModels.Categories
+namespace RestaurantSystem.ViewModels.RestaurantTables
 {
     public class AddRestaurantTableViewModel : ANewViewModel<RestaurantTable>
     {
