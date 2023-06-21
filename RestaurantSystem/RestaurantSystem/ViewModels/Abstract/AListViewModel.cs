@@ -9,6 +9,7 @@ namespace RestaurantSystem.ViewModels.Abstract
 {
     public abstract class AListViewModel<T> : BaseViewModel
     {
+        public int? OriginatorId { get; set; }
         public IDataStore<T> DataStore => DependencyService.Get<IDataStore<T>>();
         private T _selectedItem;
         public ObservableCollection<T> Items { get; }
@@ -35,7 +36,7 @@ namespace RestaurantSystem.ViewModels.Abstract
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
+                var items = await DataStore.GetItemsAsync(true, originatorId: OriginatorId);
                 foreach (var item in items)
                 {
                     Items.Add(item);
@@ -80,7 +81,7 @@ namespace RestaurantSystem.ViewModels.Abstract
 
         private async void ExecuteDeleteCommand(int id)
         {
-            await DataStore.DeleteItemAsync(id);
+            await DataStore.DeleteItemAsync(id, OriginatorId);
             await ExecuteLoadItemsCommand();
         }
 

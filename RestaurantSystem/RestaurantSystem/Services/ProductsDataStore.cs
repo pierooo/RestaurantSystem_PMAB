@@ -63,7 +63,7 @@ namespace RestaurantSystem.Services
             };
         }
 
-        public override async Task RefreshListFromService()
+        public override async Task RefreshListFromService(int? originatorId = null)
         {
             var tmp = _service.ProductsAsync(new GetProducts()).Result.Products;
             items = tmp.Select(item => new Product

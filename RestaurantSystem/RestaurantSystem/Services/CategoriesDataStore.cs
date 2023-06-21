@@ -50,7 +50,7 @@ namespace RestaurantSystem.Services
             };
         }
 
-        public override async Task RefreshListFromService()
+        public override async Task RefreshListFromService(int? originatorId = null)
         {
             var tmp = _service.CategoriesAsync(new GetCategories()).Result.Categories;
             items = tmp.Select(x => new Category

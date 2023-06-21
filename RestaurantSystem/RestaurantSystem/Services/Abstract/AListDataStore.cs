@@ -18,23 +18,23 @@ namespace RestaurantSystem.Services.Abstract
         }
         public abstract Task<T> Find(T item);
         public abstract Task<T> Find(int id);
-        public abstract Task RefreshListFromService();
+        public abstract Task RefreshListFromService(int? originatorId = null);
         public abstract Task DeleteItemFromService(T item);
         public abstract Task UpdateItemInService(T item);
         public abstract Task AddItemToService(T item);
 
-        public async Task UpdateItemAsync(T item)
+        public async Task UpdateItemAsync(T item, int? originatorId = null)
         {
             await UpdateItemInService(item);
-            await RefreshListFromService();
+            await RefreshListFromService(originatorId);
         }
 
-        public async Task DeleteItemAsync(int id)
+        public async Task DeleteItemAsync(int id, int? originatorId = null)
         {
             var oldItem = await Find(id);
             items.Remove(oldItem);
             await DeleteItemFromService(oldItem);
-            await RefreshListFromService();
+            await RefreshListFromService(originatorId);
         }
 
         public async Task<T> GetItemAsync(int id)
@@ -42,9 +42,9 @@ namespace RestaurantSystem.Services.Abstract
             return await Task.FromResult(await Find(id));
         }
 
-        public async Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false, int? originatorId = null)
         {
-            await RefreshListFromService();
+            await RefreshListFromService(originatorId);
             return await Task.FromResult(items);
         }
     }

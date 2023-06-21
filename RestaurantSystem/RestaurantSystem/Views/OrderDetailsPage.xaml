@@ -1,30 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RestaurantSystem.Views.OrdersPage"
+             x:Class="RestaurantSystem.Views.OrderDetailsPage"
              Title="{Binding Title}"
-             xmlns:local="clr-namespace:RestaurantSystem.ViewModels.Orders"  
+             xmlns:local="clr-namespace:RestaurantSystem.ViewModels.OrdersDetails"  
              xmlns:model="clr-namespace:RestaurantSystem.Service.Reference"  
              x:Name="BrowseItemsPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
     </ContentPage.ToolbarItems>
-    <RefreshView x:DataType="local:OrdersViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+    <RefreshView x:DataType="local:OrdersDetailsViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <CollectionView x:Name="ItemsListView"
                 ItemsSource="{Binding Items}"
                 SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10" x:DataType="model:Order">
+                    <StackLayout Padding="10" x:DataType="model:OrderDetails">
                         <Label Text="{Binding Id}" 
                            LineBreakMode="NoWrap" 
                            Style="{DynamicResource ListItemTextStyle}" 
                            FontSize="12" />
-                        <Label Text="{Binding RestaurantTableID}" 
+                        <Label Text="{Binding OrderID}" 
                            LineBreakMode="NoWrap" 
                            Style="{DynamicResource ListItemTextStyle}" 
                            FontSize="16" />
-                        <Label Text="{Binding Description}" 
+                        <Label Text="{Binding ProductID}" 
+                           LineBreakMode="NoWrap"
+                           Style="{DynamicResource ListItemDetailTextStyle}"
+                           FontSize="13" />
+                        <Label Text="{Binding Quantity}" 
+                           LineBreakMode="NoWrap"
+                           Style="{DynamicResource ListItemDetailTextStyle}"
+                           FontSize="13" />
+                        <Label Text="{Binding UnitPriceGross}" 
+                           LineBreakMode="NoWrap"
+                           Style="{DynamicResource ListItemDetailTextStyle}"
+                           FontSize="13" />
+                        <Label Text="{Binding Vat}" 
                            LineBreakMode="NoWrap"
                            Style="{DynamicResource ListItemDetailTextStyle}"
                            FontSize="13" />
@@ -32,9 +44,6 @@
                         CommandParameter="{Binding Id}"
                         HorizontalOptions="Start" />
                         <Button Text="Edytuj" Command="{Binding BindingContext.EditItemCommand, Source={x:Reference Name=BrowseItemsPage}}" 
-                        CommandParameter="{Binding Id}"
-                        HorizontalOptions="Start" />
-                        <Button Text="Szczegóły zamówienia" Command="{Binding BindingContext.ViewDetailsCommand, Source={x:Reference Name=BrowseItemsPage}}" 
                         CommandParameter="{Binding Id}"
                         HorizontalOptions="Start" />
                     </StackLayout>
