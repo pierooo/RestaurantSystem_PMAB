@@ -20,7 +20,7 @@ namespace RestaurantSystem.Services
             {
                 OrderID = item.OrderID,
                 ProductID = item.ProductID,
-                Quantity = item.Quantity,
+                Quantity = item.Quantity
             });
         }
 

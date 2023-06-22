@@ -16,17 +16,19 @@ namespace RestaurantSystem.ViewModels.Abstract
         public abstract bool ValidateSave();
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
+
+        public abstract void BackToMainPageWithEntities();
         private async void OnCancel()
         {
             // This will pop the current page off the navigation stack
-            await Shell.Current.GoToAsync("..");
+            BackToMainPageWithEntities();
         }
         public abstract T SetItem();
         private async void OnSave()
         {
             await DataStore.AddItemAsync(SetItem());
             // This will pop the current page off the navigation stack
-            await Shell.Current.GoToAsync("..");
+            BackToMainPageWithEntities();
         }
     }
 }

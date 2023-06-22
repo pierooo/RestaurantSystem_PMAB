@@ -1,5 +1,6 @@
 ﻿using RestaurantSystem.Service.Reference;
 using RestaurantSystem.ViewModels.Abstract;
+using Xamarin.Forms;
 
 namespace RestaurantSystem.ViewModels.Orders
 {
@@ -37,6 +38,11 @@ namespace RestaurantSystem.ViewModels.Orders
         public override bool ValidateSave()
         {
             return true;
+        }
+
+        public override async void BackToMainPageWithEntities()
+        {
+            await Shell.Current.GoToAsync("..");
         }
     }
 }

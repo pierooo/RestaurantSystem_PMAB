@@ -23,7 +23,7 @@ namespace RestaurantSystem.ViewModels.OrdersDetails
 
         public override void GoToAddPage()
         {
-            Shell.Current.GoToAsync(nameof(AddOrderPage));
+            Shell.Current.Navigation.PushAsync(new AddOrderDetailsPage(order));
         }
     }
 }
