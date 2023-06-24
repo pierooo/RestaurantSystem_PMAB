@@ -43,9 +43,6 @@
                         <Button Text="Usuń" Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference Name=BrowseItemsPage}}" 
                         CommandParameter="{Binding Id}"
                         HorizontalOptions="Start" />
-                        <Button Text="Edytuj" Command="{Binding BindingContext.EditItemCommand, Source={x:Reference Name=BrowseItemsPage}}" 
-                        CommandParameter="{Binding Id}"
-                        HorizontalOptions="Start" />
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

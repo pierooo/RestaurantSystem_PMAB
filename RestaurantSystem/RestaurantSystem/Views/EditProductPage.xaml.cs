@@ -10,11 +10,11 @@ namespace RestaurantSystem.Views
     {
         public Product Product { get; set; }
 
-        public EditProductPage(Product product)
+        public EditProductPage(Product category)
         {
-            Product = product;
+            Product = category;
             InitializeComponent();
-            BindingContext = new EditProductViewModel(product);
+            BindingContext = new EditProductViewModel(category);
         }
     }
 }

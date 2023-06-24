@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using RestaurantSystem.Contracts;
 using RestaurantSystem.Contracts.OrdersDetails.Commands;
 using RestaurantSystem.DataAccess;
@@ -21,6 +22,9 @@ public class DeleteOrderDetailsCommandHandler : HandlerBase, IRequestHandler<Del
         }
 
         item.IsActive = false;
+
+        var order = await restaurantSystemContext.Orders.SingleAsync(x => x.ID == item.OrderID);
+        order.TotalPriceGross -= (item.UnitPriceNetto * (1 + (item.VAT / 100))) * item.Quantity;
 
         await restaurantSystemContext.SaveChangesAsync();
 

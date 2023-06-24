@@ -15,29 +15,40 @@
                 SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10" x:DataType="model:Category">
+                    <StackLayout Padding="10" x:DataType="model:Category" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Image Source="{Binding PhotoUrl}" WidthRequest="200" HeightRequest="200"/>
+                        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="60"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Text="Usuń" Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference Name=BrowseItemsPage}}" 
+                        CommandParameter="{Binding Id}"
+                        HorizontalOptions="Start"
+                        WidthRequest="60"/>
+                            <Button Text="Edytuj" Command="{Binding BindingContext.EditItemCommand, Source={x:Reference Name=BrowseItemsPage}}" 
+                        CommandParameter="{Binding Id}"
+                        HorizontalOptions="Start" 
+                        Grid.Column="1"
+                        WidthRequest="60"/>
+                        </Grid>
+
                         <Label Text="{Binding Id}" 
                            LineBreakMode="NoWrap" 
                            Style="{DynamicResource ListItemTextStyle}" 
-                           FontSize="12" />
+                           FontSize="12"
+                           HorizontalOptions="Center"/>
                         <Label Text="{Binding Name}" 
                            LineBreakMode="NoWrap" 
                            Style="{DynamicResource ListItemTextStyle}" 
-                           FontSize="16" />
+                           FontSize="24"
+                           HorizontalOptions="Center"/>
                         <Label Text="{Binding Description}" 
                            LineBreakMode="NoWrap"
                            Style="{DynamicResource ListItemDetailTextStyle}"
-                           FontSize="13" />
-                        <Label Text="{Binding PhotoUrl}" 
-                           LineBreakMode="NoWrap"
-                           Style="{DynamicResource ListItemDetailTextStyle}"
-                           FontSize="13" />
-                        <Button Text="Usuń" Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference Name=BrowseItemsPage}}" 
-                        CommandParameter="{Binding Id}"
-                        HorizontalOptions="Start" />
-                        <Button Text="Edytuj" Command="{Binding BindingContext.EditItemCommand, Source={x:Reference Name=BrowseItemsPage}}" 
-                        CommandParameter="{Binding Id}"
-                        HorizontalOptions="Start" />
+                           FontSize="13" 
+                           HorizontalOptions="Center"/>
+
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

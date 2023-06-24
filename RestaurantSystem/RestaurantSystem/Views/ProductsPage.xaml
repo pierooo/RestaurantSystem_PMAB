@@ -15,46 +15,113 @@
                 SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10" x:DataType="model:Product">
-                        <Label Text="{Binding Id}" 
-                           LineBreakMode="NoWrap" 
-                           Style="{DynamicResource ListItemTextStyle}" 
-                           FontSize="12" />
-                        <Label Text="{Binding Name}" 
-                           LineBreakMode="NoWrap" 
-                           Style="{DynamicResource ListItemTextStyle}" 
-                           FontSize="16" />
-                        <Label Text="{Binding Description}" 
-                           LineBreakMode="NoWrap"
-                           Style="{DynamicResource ListItemDetailTextStyle}"
-                           FontSize="13" />
-                        <Label Text="{Binding PhotoUrl}" 
-                           LineBreakMode="NoWrap"
-                           Style="{DynamicResource ListItemDetailTextStyle}"
-                           FontSize="13" />
-                        <Label Text="{Binding CategoryID}" 
-                           LineBreakMode="NoWrap"
-                           Style="{DynamicResource ListItemDetailTextStyle}"
-                           FontSize="13" />
-                        <Label Text="{Binding UnitPriceGross}" 
-                           LineBreakMode="NoWrap"
-                           Style="{DynamicResource ListItemDetailTextStyle}"
-                           FontSize="13" />
-                        <Label Text="{Binding Vat}" 
-                           LineBreakMode="NoWrap"
-                           Style="{DynamicResource ListItemDetailTextStyle}"
-                           FontSize="13" />
-                        <Label Text="{Binding UnitsInStock}" 
-                           LineBreakMode="NoWrap"
-                           Style="{DynamicResource ListItemDetailTextStyle}"
-                           FontSize="13" />
-                        <Button Text="Usuń" Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference Name=BrowseItemsPage}}" 
-                        CommandParameter="{Binding Id}"
-                        HorizontalOptions="Start" />
-                        <Button Text="Edytuj" Command="{Binding BindingContext.EditItemCommand, Source={x:Reference Name=BrowseItemsPage}}" 
-                        CommandParameter="{Binding Id}"
-                        HorizontalOptions="Start" />
-                    </StackLayout>
+                    <Frame Margin="10" Padding="10" BorderColor="LightGray" CornerRadius="5" HorizontalOptions="Center" VerticalOptions="Center">
+                        <StackLayout Padding="10" x:DataType="model:Product" VerticalOptions="Center" HorizontalOptions="Center">
+                            <Image Source="{Binding PhotoUrl}"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="70"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Text="Usuń" Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference Name=BrowseItemsPage}}"
+                                    CommandParameter="{Binding Id}"
+                                    HorizontalOptions="Start"
+                                    Grid.Row="0" Grid.Column="0" />
+
+                                <Button Text="Edytuj" Command="{Binding BindingContext.EditItemCommand, Source={x:Reference Name=BrowseItemsPage}}"
+                                    CommandParameter="{Binding Id}"
+                                    HorizontalOptions="Start"
+                                    Grid.Row="0" Grid.Column="1" />
+                            </Grid>
+                            
+                            <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Id" Grid.Row="0" Grid.Column="0"
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemLabelStyle}"
+                                   FontSize="13" />
+
+                                <Label Text="{Binding Id}" Grid.Row="0" Grid.Column="1"
+                                   LineBreakMode="NoWrap" FontAttributes="Bold"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13" />
+
+                                <Label Text="Nazwa" Grid.Row="1" Grid.Column="0"
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemLabelStyle}"
+                                   FontSize="13" />
+
+                                <Label Text="{Binding Name}" Grid.Row="1" Grid.Column="1"
+                                   LineBreakMode="NoWrap" FontAttributes="Bold"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13" />
+                                
+                                <Label Text="Opis" Grid.Row="2" Grid.Column="0"
+                                   LineBreakMode="NoWrap" 
+                                   Style="{DynamicResource ListItemLabelStyle}"
+                                   FontSize="13" />
+
+                                <Label Text="{Binding Description}" 
+                                   LineBreakMode="NoWrap" FontAttributes="Bold"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13" 
+                                   Grid.Row="2"  Grid.Column="1"/>
+
+                                <Label Text="Kategoria" Grid.Row="3" Grid.Column="0"
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemLabelStyle}"
+                                   FontSize="13" />
+                                <Label Text="{Binding CategoryID}" Grid.Row="3" Grid.Column="1"
+                                   LineBreakMode="NoWrap" FontAttributes="Bold"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13" />
+
+                                <Label Text="Cena" Grid.Row="4" Grid.Column="0"
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemLabelStyle}"
+                                   FontSize="13" />
+                                <Label Text="{Binding UnitPriceGross}" Grid.Row="4" Grid.Column="1"
+                                   LineBreakMode="NoWrap" FontAttributes="Bold"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13" />
+
+                                <Label Text="VAT" Grid.Row="5" Grid.Column="0"
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemLabelStyle}"
+                                   FontSize="13" />
+                                <Label Text="{Binding Vat}" Grid.Row="5" Grid.Column="1"
+                                   LineBreakMode="NoWrap" FontAttributes="Bold"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13" />
+                                
+                                <Label Text="Na stanie" Grid.Row="6" Grid.Column="0"
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemLabelStyle}"
+                                   FontSize="13" />
+                                <Label Text="{Binding UnitsInStock}" Grid.Row="6" Grid.Column="1"
+                                   LineBreakMode="NoWrap" FontAttributes="Bold"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13" />                               
+                                
+                            </Grid>
+                        </StackLayout>
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RestaurantSystem.Views.AboutPage"
-             xmlns:vm="clr-namespace:RestaurantSystem.ViewModels"
+             xmlns:vm="clr-namespace:RestaurantSystem.ViewModels"           
              Title="{Binding Title}">
     
     <ContentPage.BindingContext>
@@ -14,39 +14,34 @@
             <Color x:Key="Accent">#96d1ff</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
-                    <Image Source="xamarin_logo.png" VerticalOptions="Center" HeightRequest="64" />
-                </ContentView>
-            </StackLayout>
-        </StackLayout>
-        <ScrollView Grid.Row="1">
-            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
-                <Label Text="Start developing now" FontSize="Title"/>
-                <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="0,0,0,0"/>
-                <Label FontSize="16" Padding="0,24,0,0">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <FormattedString.Spans>
-                                <Span Text="Learn more at "/>
-                                <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                            </FormattedString.Spans>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <Button Margin="0,10,0,0" Text="Learn more"
-                        Command="{Binding OpenWebCommand}"
-                        BackgroundColor="{StaticResource Primary}"
-                        TextColor="White" />
-            </StackLayout>
-        </ScrollView>
-    </Grid>
 
+        <!-- Header -->
+        <StackLayout Grid.Row="0" BackgroundColor="#FBC02D" Padding="20">
+            <Image Source="https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/ZCCZKF2HGJ7BLJHVUDT7TPGZCE.jpg" Aspect="AspectFill" HeightRequest="300" />
+        </StackLayout>
+
+        <!-- Main Content -->
+     
+
+            <!-- Background Image -->
+
+            <!-- Introduction -->
+            <StackLayout Grid.Row="1" Padding="20" VerticalOptions="Center">
+                <Label Text="Witaj w naszej restauracji!" FontSize="Large" HorizontalTextAlignment="Center" TextColor="DarkRed" />
+            <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris." FontSize="16" HorizontalTextAlignment="Center" TextColor="DarkRed" Margin="0,20,0,0" />
+            </StackLayout>
+
+            <!-- Start Button -->
+            <StackLayout Grid.Row="2" BackgroundColor="#FBC02D" Padding="10">
+            <Button x:Name="ProductsButton" Text="Nasze produkty" BackgroundColor="#D32F2F" TextColor="White" HorizontalOptions="Center" WidthRequest="200" HeightRequest="70" FontSize="18" Clicked="ProductsButton_Clicked" />
+        </StackLayout>
+        
+    </Grid>
 </ContentPage>

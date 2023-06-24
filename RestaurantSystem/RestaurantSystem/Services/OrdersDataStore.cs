@@ -56,6 +56,7 @@ namespace RestaurantSystem.Services
                 Id = item.Id,
                 RestaurantTableID = item.RestaurantTableID,
                 Description = item.Description,
+                TotalPriceGross = item.TotalPriceGross
             }).ToList();
         }
 

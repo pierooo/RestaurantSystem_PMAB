@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.2.2" />
     <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="7.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -29,23 +28,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\Helpers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Views\AddCategoryPage.xaml.cs">
       <DependentUpon>AddCategoryPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\OrderDetailsPage.xaml.cs">
-      <DependentUpon>OrderDetailsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Views\AddCategoryPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\AddOrderDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\AddOrderPage.xaml">
@@ -60,16 +49,10 @@
     <EmbeddedResource Update="Views\EditCategoryPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\EditOrderDetailsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Views\EditOrderPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\EditProductPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\OrderDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\OrdersPage.xaml">

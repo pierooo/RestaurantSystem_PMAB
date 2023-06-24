@@ -10,6 +10,13 @@ namespace RestaurantSystem.Views
         public AboutPage()
         {
             InitializeComponent();
-        }
-    }
+			ProductsButton.Clicked += ProductsButton_Clicked;
+
+		}
+		private void ProductsButton_Clicked(object sender, EventArgs e)
+		{
+			// Navigate to the ProductsPage.xaml
+			Navigation.PushAsync(new ProductsPage());
+		}
+	}
 }

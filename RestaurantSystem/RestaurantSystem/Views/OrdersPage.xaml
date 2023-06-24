@@ -15,29 +15,85 @@
                 SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10" x:DataType="model:Order">
-                        <Label Text="{Binding Id}" 
+                    <Frame BorderColor="LightGray" HasShadow="False" Padding="5" Margin="5">
+                        <StackLayout Padding="10" x:DataType="model:Order">
+                            <Label Text="Dane zamówienia:" LineBreakMode="NoWrap" 
+                           Style="{DynamicResource ListItemTextStyle}" 
+                           FontSize="20" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Label Text="Id zamówienia" 
+                           LineBreakMode="NoWrap" 
+                           Style="{DynamicResource ListItemDetailTextStyle}" 
+                           FontSize="13"
+                           Grid.Column="0" Grid.Row="0"/>
+                                <Label Text="{Binding Id}" 
                            LineBreakMode="NoWrap" 
                            Style="{DynamicResource ListItemTextStyle}" 
-                           FontSize="12" />
-                        <Label Text="{Binding RestaurantTableID}" 
+                           FontSize="13"
+                           Grid.Column="1" Grid.Row="0"/>
+
+                                <Label Text="Id stolika" 
+                           LineBreakMode="NoWrap" 
+                           Style="{DynamicResource ListItemDetailTextStyle}" 
+                           FontSize="13" 
+                           Grid.Column="0" Grid.Row="1"/>
+                                <Label Text="{Binding RestaurantTableID}" 
                            LineBreakMode="NoWrap" 
                            Style="{DynamicResource ListItemTextStyle}" 
-                           FontSize="16" />
-                        <Label Text="{Binding Description}" 
+                           FontSize="13" 
+                           Grid.Column="1" Grid.Row="1"/>
+                                <Label Text="Łączna kwota:" 
+                           LineBreakMode="NoWrap" 
+                           Style="{DynamicResource ListItemDetailTextStyle}" 
+                           FontSize="13" 
+                           Grid.Column="0" Grid.Row="2"/>
+                                <Label Text="{Binding TotalPriceGross}" 
+                           LineBreakMode="NoWrap" 
+                           Style="{DynamicResource ListItemTextStyle}" 
+                           FontSize="13" 
+                           Grid.Column="1" Grid.Row="2"/>
+
+                                <Label Text="Opis" 
                            LineBreakMode="NoWrap"
                            Style="{DynamicResource ListItemDetailTextStyle}"
-                           FontSize="13" />
-                        <Button Text="Usuń" Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference Name=BrowseItemsPage}}" 
+                           FontSize="13"
+                           Grid.Column="0" Grid.Row="3"/>
+                                <Label Text="{Binding Description}" 
+                           LineBreakMode="NoWrap"
+                           Style="{DynamicResource ListItemTextStyle}"
+                           FontSize="13"
+                           Grid.Column="1" Grid.Row="3"/>
+                                <Grid Grid.Row="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="70"/>
+                                        <ColumnDefinition Width="180"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Text="Usuń" Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference Name=BrowseItemsPage}}" 
                         CommandParameter="{Binding Id}"
-                        HorizontalOptions="Start" />
-                        <Button Text="Edytuj" Command="{Binding BindingContext.EditItemCommand, Source={x:Reference Name=BrowseItemsPage}}" 
+                        HorizontalOptions="Start" Grid.Column="0"/>
+                                    <Button Text="Edytuj" Command="{Binding BindingContext.EditItemCommand, Source={x:Reference Name=BrowseItemsPage}}" 
                         CommandParameter="{Binding Id}"
-                        HorizontalOptions="Start" />
-                        <Button Text="Szczegóły zamówienia" Command="{Binding BindingContext.ViewDetailsCommand, Source={x:Reference Name=BrowseItemsPage}}" 
+                        HorizontalOptions="Start" Grid.Column="1"/>
+                                    <Button Text="Szczegóły zamówienia" Command="{Binding BindingContext.ViewDetailsCommand, Source={x:Reference Name=BrowseItemsPage}}" 
                         CommandParameter="{Binding Id}"
-                        HorizontalOptions="Start" />
-                    </StackLayout>
+                        HorizontalOptions="Start" Grid.Column="2"/>
+                                </Grid>
+                            </Grid>
+                        </StackLayout>
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
