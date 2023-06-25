@@ -34,7 +34,7 @@
 
             <!-- Introduction -->
             <StackLayout Grid.Row="1" Padding="20" VerticalOptions="Center">
-                <Label Text="Witaj w naszej restauracji!" FontSize="Large" HorizontalTextAlignment="Center" TextColor="DarkRed" />
+                <Label Text="System zamówień!" FontSize="Large" HorizontalTextAlignment="Center" TextColor="DarkRed" />
             <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris." FontSize="16" HorizontalTextAlignment="Center" TextColor="DarkRed" Margin="0,20,0,0" />
             </StackLayout>
 

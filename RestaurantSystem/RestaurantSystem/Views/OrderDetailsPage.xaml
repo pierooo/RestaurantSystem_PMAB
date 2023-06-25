@@ -16,7 +16,15 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="10" x:DataType="model:OrderDetails">
+                        <Label Text="Id" 
+                           LineBreakMode="NoWrap" 
+                           Style="{DynamicResource ListItemTextStyle}" 
+                           FontSize="12" />
                         <Label Text="{Binding Id}" 
+                           LineBreakMode="NoWrap" 
+                           Style="{DynamicResource ListItemTextStyle}" 
+                           FontSize="12" />
+                        <Label Text="Id zamówienia" 
                            LineBreakMode="NoWrap" 
                            Style="{DynamicResource ListItemTextStyle}" 
                            FontSize="12" />
@@ -24,18 +32,34 @@
                            LineBreakMode="NoWrap" 
                            Style="{DynamicResource ListItemTextStyle}" 
                            FontSize="16" />
+                        <Label Text="Id produktu" 
+                           LineBreakMode="NoWrap" 
+                           Style="{DynamicResource ListItemTextStyle}" 
+                           FontSize="12" />
                         <Label Text="{Binding ProductID}" 
                            LineBreakMode="NoWrap"
                            Style="{DynamicResource ListItemDetailTextStyle}"
                            FontSize="13" />
+                        <Label Text="Ilość" 
+                           LineBreakMode="NoWrap" 
+                           Style="{DynamicResource ListItemTextStyle}" 
+                           FontSize="12" />
                         <Label Text="{Binding Quantity}" 
                            LineBreakMode="NoWrap"
                            Style="{DynamicResource ListItemDetailTextStyle}"
                            FontSize="13" />
+                        <Label Text="Cena jednostkowa brutto" 
+                           LineBreakMode="NoWrap" 
+                           Style="{DynamicResource ListItemTextStyle}" 
+                           FontSize="12" />
                         <Label Text="{Binding UnitPriceGross}" 
                            LineBreakMode="NoWrap"
                            Style="{DynamicResource ListItemDetailTextStyle}"
                            FontSize="13" />
+                        <Label Text="Stawka Vat" 
+                           LineBreakMode="NoWrap" 
+                           Style="{DynamicResource ListItemTextStyle}" 
+                           FontSize="12" />
                         <Label Text="{Binding Vat}" 
                            LineBreakMode="NoWrap"
                            Style="{DynamicResource ListItemDetailTextStyle}"
